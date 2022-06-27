@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from 'express'
 import cors from 'cors'
+import connectDB from './database/db'
 
+connectDB()
 const app: Express = express()
 app.use(express.json())
 app.use(cors())
