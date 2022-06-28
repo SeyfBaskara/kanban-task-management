@@ -1,16 +1,18 @@
 import express from 'express'
 import { createBoard, getBoard, deleteBoard, updateBoard } from '../controllers/board'
-import { createColumn } from '../controllers/column'
+import { createColumn, deleteColumn, updateColumn } from '../controllers/column'
 
 const router = express.Router()
 
 // Board routers
 router.post('/create', createBoard)
 router.get('/', getBoard)
-router.delete('/:id', deleteBoard)
+router.delete('/delete/:id', deleteBoard)
 router.patch('/update/:id', updateBoard)
 
 // Column routers
 router.post('/create/column/:id', createColumn)
+router.delete('/delete/column/:id', deleteColumn)
+router.patch('/update/column/:id', updateColumn)
 
 export default router
