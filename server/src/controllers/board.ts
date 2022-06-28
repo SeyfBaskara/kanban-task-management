@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express'
-// import { AppError, HttpCode } from '../utils/AppError'
 import Board from '../models/Board'
 
 export const createBoard = async (req: Request, res: Response, next: NextFunction) => {
