@@ -26,6 +26,34 @@ export const getBoard = async (_req: Request, res: Response, next: NextFunction)
    }
 }
 
+export const updateBoard = async (req: Request, res: Response, next: NextFunction) => {
+   const updates = Object.keys(req.body)
+   const allowUpdates = ['name']
+   const isValidoperation = updates.every((update) => allowUpdates.includes(update))
+
+   try {
+      if (!isValidoperation) {
+         throw new AppError({
+            httpCode: HttpCode.BAD_REQUEST,
+            description: 'Invalid value field updates!',
+         })
+      }
+
+      const board = await Board.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+
+      if (!board) {
+         throw new AppError({
+            httpCode: HttpCode.NOT_FOUND,
+            description: 'Board is not found!',
+         })
+      }
+
+      res.status(201).json(board)
+   } catch (error) {
+      next(error)
+   }
+}
+
 export const deleteBoard = async (req: Request, res: Response, next: NextFunction) => {
    try {
       const board = await Board.findByIdAndDelete(req.params.id)
