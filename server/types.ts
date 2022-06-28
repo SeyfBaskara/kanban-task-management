@@ -6,4 +6,5 @@ export interface IBoard {
 export interface IColumn {
    _id: string
    name: string
+   boardID: string
 }

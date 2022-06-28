@@ -9,7 +9,7 @@ const boardSchema = new Schema<IBoard>({
       required: true,
       unique: true,
    },
-   columns: [{ type: String, ref: 'Column' }],
+   columns: [{ type: String, unique: true, ref: 'Column' }],
 })
 
 const Board = model<IBoard>('Board', boardSchema)
