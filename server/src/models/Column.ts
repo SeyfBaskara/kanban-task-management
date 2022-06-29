@@ -12,6 +12,7 @@ const columnSchema = new Schema<IColumn>({
    boardID: {
       type: String,
    },
+   tasks: [{ type: String, ref: 'Task' }],
 })
 
 const Column = model<IColumn>('Column', columnSchema)

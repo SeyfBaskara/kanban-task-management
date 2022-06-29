@@ -7,4 +7,12 @@ export interface IColumn {
    _id: string
    name: string
    boardID: string
+   tasks: ITask[]
+}
+
+export interface ITask {
+   _id: string
+   title: string
+   description: string
+   status: string
 }

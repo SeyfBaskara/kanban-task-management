@@ -18,7 +18,16 @@ export const createBoard = async (req: Request, res: Response, next: NextFunctio
 
 export const getBoard = async (_req: Request, res: Response, next: NextFunction) => {
    try {
-      const boards = await Board.find({}).populate({ path: 'columns' })
+      const boards = await Board.find({}).populate({
+         path: 'columns',
+         model: 'Column',
+         populate: [
+            {
+               path: 'tasks',
+               model: 'Task',
+            },
+         ],
+      })
 
       res.status(200).json(boards)
    } catch (error) {
@@ -35,7 +44,7 @@ export const updateBoard = async (req: Request, res: Response, next: NextFunctio
       if (!isValidoperation) {
          throw new AppError({
             httpCode: HttpCode.BAD_REQUEST,
-            description: 'Invalid value field updates!',
+            description: 'Invalid board value field updates!',
          })
       }
 
