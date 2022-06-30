@@ -18,7 +18,7 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
    }
 }
 
-export const getTask = async (_req: Request, res: Response, next: NextFunction) => {
+export const getTasks = async (_req: Request, res: Response, next: NextFunction) => {
    try {
       const task = await Task.find()
 

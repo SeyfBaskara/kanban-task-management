@@ -16,3 +16,9 @@ export interface ITask {
    description: string
    status: string
 }
+
+export interface ISubTask {
+   _id: string
+   title: string
+   isCompleted: boolean
+}

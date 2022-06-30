@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
 import { IBoard } from '../../types'
 
-const boardSchema = new Schema<IBoard>({
+const BoardSchema = new Schema<IBoard>({
    _id: { type: String, default: uuidv4 },
    name: {
       type: String,
@@ -12,6 +12,6 @@ const boardSchema = new Schema<IBoard>({
    columns: [{ type: String, unique: true, ref: 'Column' }],
 })
 
-const Board = model<IBoard>('Board', boardSchema)
+const Board = model<IBoard>('Board', BoardSchema)
 
 export default Board
