@@ -10,7 +10,7 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 
    try {
       await newTask.save()
-      await Column.findByIdAndUpdate(req.params.id, { $push: { tasks: newTask } }, { new: true, runValidators: true })
+      await Column.findOneAndUpdate({ name: newTask.status }, { $push: { tasks: newTask } }, { new: true, runValidators: true })
 
       res.status(201).json(newTask)
    } catch (error) {

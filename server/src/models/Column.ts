@@ -8,6 +8,7 @@ const columnSchema = new Schema<IColumn>({
       type: String,
       required: true,
       unique: true,
+      lowercase: true,
    },
    boardID: {
       type: String,
@@ -16,5 +17,13 @@ const columnSchema = new Schema<IColumn>({
 })
 
 const Column = model<IColumn>('Column', columnSchema)
+
+// columnSchema.pre('deleteOne', async function (next) {
+//    let column: any = this
+//    console.log('this is first pre')
+//    await column.model('Task').deleteMany({ status: column.name })
+//    console.log('this is pre')
+//    next()
+// })
 
 export default Column

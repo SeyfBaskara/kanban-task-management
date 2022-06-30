@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { AppError, HttpCode } from '../utils/AppError'
 import Column from '../models/Column'
 import Board from '../models/Board'
+import Task from '../models/Task'
 
 export const createColumn = async (req: Request, res: Response, next: NextFunction) => {
    const { name } = req.body
@@ -10,7 +11,11 @@ export const createColumn = async (req: Request, res: Response, next: NextFuncti
 
    try {
       await newColumn.save()
-      await Board.findByIdAndUpdate(req.params.id, { $push: { columns: newColumn } }, { new: true, runValidators: true })
+      await Board.findOneAndUpdate(
+         { _id: newColumn.boardID },
+         { $push: { columns: newColumn } },
+         { new: true, runValidators: true }
+      )
       res.status(201).json(newColumn)
    } catch (error) {
       next(error)
@@ -55,6 +60,8 @@ export const deleteColumn = async (req: Request, res: Response, next: NextFuncti
             description: 'Column is not found',
          })
       }
+
+      await Task.deleteMany({ status: column.name })
 
       res.status(200).json(column)
    } catch (error) {
