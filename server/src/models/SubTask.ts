@@ -12,6 +12,11 @@ const SubTaskSchema = new Schema<ISubTask>({
    isCompleted: {
       type: Boolean,
    },
+   status: {
+      type: String,
+      required: true,
+      lowercase: true,
+   },
 })
 
 const SubTask = model<ISubTask>('SubTask', SubTaskSchema)

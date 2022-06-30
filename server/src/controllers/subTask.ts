@@ -1,14 +1,16 @@
 import { NextFunction, Request, Response } from 'express'
 import { AppError, HttpCode } from '../utils/AppError'
 import SubTask from '../models/SubTask'
+import Task from '../models/Task'
 
 export const createSubtask = async (req: Request, res: Response, next: NextFunction) => {
-   const { title, isCompleted } = req.body
+   const { title, isCompleted, status } = req.body
 
-   const newSubtask = new SubTask({ title, isCompleted })
+   const newSubtask = new SubTask({ title, isCompleted, status })
 
    try {
       await newSubtask.save()
+      await Task.findOneAndUpdate({ status }, { $push: { subtasks: newSubtask } }, { new: true, runValidators: true })
 
       res.status(201).json(newSubtask)
    } catch (error) {
@@ -35,7 +37,7 @@ export const getSubtasks = async (_req: Request, res: Response, next: NextFuncti
 
 export const updateSubtask = async (req: Request, res: Response, next: NextFunction) => {
    const updates = Object.keys(req.body)
-   const allowUpdates = ['title', 'isCompleted']
+   const allowUpdates = ['title', 'isCompleted', 'status']
    const isValidoperation = updates.every((update) => allowUpdates.includes(update))
 
    try {

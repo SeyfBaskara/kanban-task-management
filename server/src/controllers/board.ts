@@ -21,12 +21,14 @@ export const getBoard = async (_req: Request, res: Response, next: NextFunction)
       const boards = await Board.find({}).populate({
          path: 'columns',
          model: 'Column',
-         populate: [
-            {
-               path: 'tasks',
-               model: 'Task',
+         populate: {
+            path: 'tasks',
+            model: 'Task',
+            populate: {
+               path: 'subtasks',
+               model: 'SubTask',
             },
-         ],
+         },
       })
 
       res.status(200).json(boards)

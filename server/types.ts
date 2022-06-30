@@ -15,10 +15,12 @@ export interface ITask {
    title: string
    description: string
    status: string
+   subtasks: ISubTask[]
 }
 
 export interface ISubTask {
    _id: string
    title: string
    isCompleted: boolean
+   status: string
 }

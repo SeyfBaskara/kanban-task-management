@@ -17,6 +17,7 @@ const TaskSchema = new Schema<ITask>({
       required: true,
       lowercase: true,
    },
+   subtasks: [{ type: String, ref: 'SubTask' }],
 })
 
 const Task = model<ITask>('Task', TaskSchema)

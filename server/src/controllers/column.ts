@@ -3,6 +3,7 @@ import { AppError, HttpCode } from '../utils/AppError'
 import Column from '../models/Column'
 import Board from '../models/Board'
 import Task from '../models/Task'
+import SubTask from '../models/SubTask'
 
 export const createColumn = async (req: Request, res: Response, next: NextFunction) => {
    const { name } = req.body
@@ -62,6 +63,7 @@ export const deleteColumn = async (req: Request, res: Response, next: NextFuncti
       }
 
       await Task.deleteMany({ status: column.name })
+      await SubTask.deleteMany({ status: column.name })
 
       res.status(200).json(column)
    } catch (error) {
