@@ -1,8 +1,6 @@
 import { AppError, HttpCode } from '../utils/AppError'
 import { NextFunction, Request, Response } from 'express'
 import Task from '../models/Task'
-import Column from '../models/Column'
-import SubTask from '../models/SubTask'
 
 export const createTask = async (req: Request, res: Response, next: NextFunction) => {
    const { title, description, status } = req.body
@@ -11,7 +9,6 @@ export const createTask = async (req: Request, res: Response, next: NextFunction
 
    try {
       await newTask.save()
-      await Column.findOneAndUpdate({ name: newTask.status }, { $push: { tasks: newTask } }, { new: true, runValidators: true })
 
       res.status(201).json(newTask)
    } catch (error) {
@@ -66,7 +63,7 @@ export const updateTask = async (req: Request, res: Response, next: NextFunction
 
 export const deleteTask = async (req: Request, res: Response, next: NextFunction) => {
    try {
-      const task = await Task.findByIdAndDelete(req.params.id)
+      const task = await Task.findOne({ _id: req.params.id })
 
       if (!task) {
          throw new AppError({
@@ -75,7 +72,7 @@ export const deleteTask = async (req: Request, res: Response, next: NextFunction
          })
       }
 
-      await SubTask.deleteMany({ status: task.status })
+      await task.deleteOne()
       res.status(200).json(task)
    } catch (error) {
       next(error)

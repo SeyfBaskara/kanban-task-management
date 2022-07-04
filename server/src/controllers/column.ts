@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from 'express'
 import { AppError, HttpCode } from '../utils/AppError'
 import Column from '../models/Column'
 import Board from '../models/Board'
-import Task from '../models/Task'
-import SubTask from '../models/SubTask'
 
 export const createColumn = async (req: Request, res: Response, next: NextFunction) => {
    const { name } = req.body
@@ -53,7 +51,7 @@ export const updateColumn = async (req: Request, res: Response, next: NextFuncti
 
 export const deleteColumn = async (req: Request, res: Response, next: NextFunction) => {
    try {
-      const column = await Column.findByIdAndDelete(req.params.id)
+      const column = await Column.findOne({ _id: req.params.id })
 
       if (!column) {
          throw new AppError({
@@ -62,8 +60,7 @@ export const deleteColumn = async (req: Request, res: Response, next: NextFuncti
          })
       }
 
-      await Task.deleteMany({ status: column.name })
-      await SubTask.deleteMany({ status: column.name })
+      await column.deleteOne()
 
       res.status(200).json(column)
    } catch (error) {
