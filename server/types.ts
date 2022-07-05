@@ -15,6 +15,7 @@ export interface ITask {
    title: string
    description: string
    status: string
+   boardID: string
    subtasks: ISubTask[]
 }
 
@@ -23,4 +24,5 @@ export interface ISubTask {
    title: string
    isCompleted: boolean
    status: string
+   boardID: string
 }

@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { AppError, HttpCode } from '../utils/AppError'
 import Board from '../models/Board'
-import Column from '../models/Column'
 
 export const createBoard = async (req: Request, res: Response, next: NextFunction) => {
    const { name } = req.body
@@ -67,7 +66,7 @@ export const updateBoard = async (req: Request, res: Response, next: NextFunctio
 
 export const deleteBoard = async (req: Request, res: Response, next: NextFunction) => {
    try {
-      const board = await Board.findByIdAndDelete(req.params.id)
+      const board = await Board.findOne({ _id: req.params.id })
 
       if (!board) {
          throw new AppError({
@@ -76,7 +75,7 @@ export const deleteBoard = async (req: Request, res: Response, next: NextFunctio
          })
       }
 
-      await Column.deleteMany({ boardID: req.params.id })
+      await board.deleteOne()
       res.status(200).json(board)
    } catch (error) {
       next(error)

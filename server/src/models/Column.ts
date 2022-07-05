@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
 import { IColumn } from '../../types'
-// import Board from './Board'
 import Task from './Task'
 import SubTask from './SubTask'
 
@@ -18,11 +17,6 @@ const ColumnSchema = new Schema<IColumn>({
    },
    tasks: [{ type: String, ref: 'Task' }],
 })
-
-// ColumnSchema.post<IColumn>('save', async function (next) {
-//    await Board.findOneAndUpdate({ _id: this.boardID }, { $push: { columns: this } }, { new: true, runValidators: true })
-//    next()
-// })
 
 ColumnSchema.pre('deleteOne', { document: true }, async function (next) {
    await Task.deleteMany({ status: this.name })

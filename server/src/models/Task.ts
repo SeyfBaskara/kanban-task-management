@@ -2,7 +2,6 @@ import { Schema, model } from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
 import { ITask } from '../../types'
 import SubTask from './SubTask'
-import Column from './Column'
 
 const TaskSchema = new Schema<ITask>({
    _id: { type: String, default: uuidv4 },
@@ -19,12 +18,10 @@ const TaskSchema = new Schema<ITask>({
       required: true,
       lowercase: true,
    },
+   boardID: {
+      type: String,
+   },
    subtasks: [{ type: String, ref: 'SubTask' }],
-})
-
-TaskSchema.post('save', async function (next: any) {
-   await Column.findOneAndUpdate({ name: this.status }, { $push: { tasks: this } }, { new: true, runValidators: true })
-   next()
 })
 
 TaskSchema.pre('deleteOne', { document: true }, async function (next: any) {

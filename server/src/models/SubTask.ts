@@ -17,6 +17,9 @@ const SubTaskSchema = new Schema<ISubTask>({
       required: true,
       lowercase: true,
    },
+   boardID: {
+      type: String,
+   },
 })
 
 const SubTask = model<ISubTask>('SubTask', SubTaskSchema)

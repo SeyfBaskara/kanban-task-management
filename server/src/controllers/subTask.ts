@@ -6,7 +6,8 @@ import Task from '../models/Task'
 export const createSubtask = async (req: Request, res: Response, next: NextFunction) => {
    const { title, isCompleted, status } = req.body
 
-   const newSubtask = new SubTask({ title, isCompleted, status })
+   const task = await Task.findOne({ status })
+   const newSubtask = new SubTask({ title, isCompleted, status, boardID: task?.boardID })
 
    try {
       await newSubtask.save()
