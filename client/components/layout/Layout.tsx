@@ -1,13 +1,15 @@
 import React from 'react'
 import Header from './Header'
-import Footer from './Footer'
+import SideBar from './SideBar'
 
 const Layout = ({ children }: any): JSX.Element => {
    return (
       <>
          <Header />
-         <main>{children}</main>
-         <Footer />
+         <main className="flex flex-row-reverse">
+            {children}
+            <SideBar />
+         </main>
       </>
    )
 }
