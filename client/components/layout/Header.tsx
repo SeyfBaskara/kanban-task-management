@@ -5,7 +5,7 @@ const Header = () => {
       <header className="w-screen flex items-center">
          <section className="hidden sm:flex w-48 shrink-0 p-3">
             <div>
-               <Image src="/assets/logo-dark.svg" alt="logo" width={153} height={26} />
+               <Image src="/assets/logo-dark.svg" alt="logo" width={143} height={23} />
             </div>
          </section>
          <section className="flex w-screen justify-between items-center p-3 border-l-2 border-lightGrey">

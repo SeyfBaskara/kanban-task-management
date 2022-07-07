@@ -6,9 +6,9 @@ const Layout = ({ children }: any): JSX.Element => {
    return (
       <>
          <Header />
-         <main className="flex flex-row-reverse">
-            {children}
+         <main className="flex">
             <SideBar />
+            {children}
          </main>
       </>
    )
