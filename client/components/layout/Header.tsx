@@ -3,7 +3,7 @@ import Image from 'next/image'
 const Header = () => {
    return (
       <header className="w-screen flex items-center">
-         <section className="hidden sm:flex w-48 shrink-0 p-3">
+         <section className="hidden sm:flex w-48 shrink-0 p-3 md:w-60">
             <div>
                <Image src="/assets/logo-dark.svg" alt="logo" width={143} height={23} />
             </div>
@@ -20,7 +20,7 @@ const Header = () => {
                   </div>
                </div>
             </div>
-            <div className="flex gap-1 items-center sm:gap-4">
+            <div className="flex gap-1 items-center sm:gap-4 md:mr-3">
                <div className="bg-purple w-12 rounded-full text-center p-1 opacity-40 sm:hidden">
                   <Image src="/assets/icon-add-task-mobile.svg" alt="add icon" width={12} height={12} />
                </div>

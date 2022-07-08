@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 const SideBar: React.FC = () => {
    return (
-      <aside className="hidden sm:flex flex-col justify-between h-screen w-48 shrink-0">
+      <aside className="hidden sm:flex flex-col justify-between h-screen w-48 shrink-0 md:w-60">
          <section>
-            <p className="pl-3 my-4 text-xs uppercase font-medium tracking-widest text-mediumGrey">All Boards(3)</p>
+            <p className="pl-3 my-4 text-xs uppercase font-medium tracking-widest text-mediumGrey">All Boards(1)</p>
             <div className="mr-3 mb-2">
                <div className="flex p-2 pl-3 gap-3 items-center bg-purple rounded-r-full">
                   <div className="relative w-4 h-4">
