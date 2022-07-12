@@ -1,6 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
-const Header = () => {
+import { setIsHide } from 'app/features/boardSlice'
+import { useAppDispatch, useAppSelector } from 'app/hooks'
+
+const Header: React.FC = () => {
+   const { isHide } = useAppSelector((state) => state.board)
+   const dispatch = useAppDispatch()
+
+   const handleSidebar = () => {
+      dispatch(setIsHide(!isHide))
+   }
+
    return (
       <header className="w-screen flex items-center">
          <section className="hidden sm:flex w-48 shrink-0 p-3 md:w-60">
@@ -15,8 +25,12 @@ const Header = () => {
                </div>
                <div className="flex gap-2">
                   <h3 className="font-bold">Platform Launch</h3>
-                  <div className="sm:hidden">
-                     <Image src="/assets/icon-chevron-down.svg" alt="chevron icon" width={10} height={7} />
+                  <div className="sm:hidden" onClick={handleSidebar}>
+                     {isHide ? (
+                        <Image src="/assets/icon-chevron-up.svg" alt="chevron icon" width={10} height={7} />
+                     ) : (
+                        <Image src="/assets/icon-chevron-down.svg" alt="chevron icon" width={10} height={7} />
+                     )}
                   </div>
                </div>
             </div>
