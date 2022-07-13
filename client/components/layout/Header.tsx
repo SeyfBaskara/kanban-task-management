@@ -1,14 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
-import { setIsHide } from 'app/features/boardSlice'
+import { setIsHide, setIsLightbox } from 'app/features/boardSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 
 const Header: React.FC = () => {
-   const { isHide } = useAppSelector((state) => state.board)
+   const { isHide, isLightbox } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
    const handleSidebar = () => {
       dispatch(setIsHide(!isHide))
+      dispatch(setIsLightbox(!isLightbox))
    }
 
    return (

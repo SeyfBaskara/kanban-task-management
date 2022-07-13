@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 // import type { AppState, AppThunk } from '../store'
 
-export interface BoardState {
+export interface IBoardState {
    isHide: boolean
+   isLightbox: boolean
 }
 
-const initialState: BoardState = {
+const initialState: IBoardState = {
    isHide: false,
+   isLightbox: false,
 }
 
 export const boardSlice = createSlice({
@@ -17,9 +19,12 @@ export const boardSlice = createSlice({
       setIsHide: (state, action: PayloadAction<boolean>) => {
          state.isHide = action.payload
       },
+      setIsLightbox: (state, action: PayloadAction<boolean>) => {
+         state.isLightbox = action.payload
+      },
    },
 })
 
-export const { setIsHide } = boardSlice.actions
+export const { setIsHide, setIsLightbox } = boardSlice.actions
 
 export default boardSlice.reducer

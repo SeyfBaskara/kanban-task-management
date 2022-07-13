@@ -1,9 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
+import { useAppSelector } from 'app/hooks'
 
 const SideBar: React.FC = () => {
+   const { isHide } = useAppSelector((state) => state.board)
+
    return (
-      <aside className="hidden sm:flex flex-col justify-between h-screen w-48 shrink-0 md:w-60">
+      <aside
+         className={`${
+            isHide
+               ? 'flex gap-5 absolute left-1/2 transform -translate-x-1/2 translate-y-5 h-auto w-56 pb-4 bg-white rounded '
+               : 'hidden'
+         } sm:flex flex-col justify-between h-screen w-48 shrink-0 md:w-60 z-50`}
+      >
          <section>
             <p className="pl-3 my-4 text-xs uppercase font-medium tracking-widest text-mediumGrey">All Boards(1)</p>
             <div className="mr-3 mb-2">
@@ -33,7 +42,7 @@ const SideBar: React.FC = () => {
                   <Image src="/assets/icon-dark-theme.svg" alt="dark theme icon" layout="fill" />
                </div>
             </div>
-            <div className="flex items-center gap-3 pl-4 mt-5 mb-10">
+            <div className={`${isHide ? 'hidden' : 'flex items-center gap-3 pl-4 mt-5 mb-10'}`}>
                <div className="relative w-5 h-4">
                   <Image src="/assets/icon-hide-sidebar.svg" alt="hide sidebar icon" layout="fill" />
                </div>

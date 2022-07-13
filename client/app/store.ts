@@ -7,7 +7,6 @@ export function makeStore() {
       reducer: {
          board: boardReducer,
       },
-      devTools: true,
    })
 }
 
