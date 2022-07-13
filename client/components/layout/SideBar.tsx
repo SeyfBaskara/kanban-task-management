@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
+import { setIsModal, setIsHide, setIsLightbox } from 'app/features/boardSlice'
 
 const SideBar: React.FC = () => {
    const { isHide } = useAppSelector((state) => state.board)
-   const [isSidebar, setIsSidebar] = useState(false)
+   const [isSidebar, setIsSidebar] = useState<boolean>(false)
+   const dispatch = useAppDispatch()
 
    const handleHideSidebar = () => {
       setIsSidebar(true)
@@ -12,6 +14,12 @@ const SideBar: React.FC = () => {
 
    const handleShowSideBar = () => {
       setIsSidebar(false)
+   }
+
+   const handleCreateBoard = () => {
+      dispatch(setIsHide(false))
+      dispatch(setIsLightbox(false))
+      dispatch(setIsModal(true))
    }
 
    return (
@@ -34,7 +42,7 @@ const SideBar: React.FC = () => {
                         <p className="text-white">Platform Launch</p>
                      </div>
                   </div>
-                  <button className="flex items-center gap-3 pl-3 text-sm text-purple">
+                  <button className="flex items-center gap-3 pl-3 text-sm text-purple" onClick={handleCreateBoard}>
                      <div className="relative w-4 h-4">
                         <Image src="/assets/icon-board.svg" alt="board icon" layout="fill" />
                      </div>

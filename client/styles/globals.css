@@ -4,6 +4,9 @@
 @tailwind utilities;
 
 @layer base {
+   * {
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+   }
    html {
       font-family: 'Plus Jakarta Sans', sans-serif;
    }
