@@ -13,7 +13,7 @@ const Header: React.FC = () => {
    }
 
    return (
-      <header className="w-screen flex items-center">
+      <header className="w-screen flex items-center fixed bg-white">
          <section className="hidden sm:flex w-48 shrink-0 p-3 md:w-60">
             <div>
                <Image src="/assets/logo-dark.svg" alt="logo" width={143} height={23} />

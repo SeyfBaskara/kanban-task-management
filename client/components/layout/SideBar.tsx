@@ -22,14 +22,14 @@ const SideBar: React.FC = () => {
    }
 
    return (
-      <aside>
+      <aside className="pt-14">
          {!isSidebar ? (
             <section
                className={`${
                   isHide
-                     ? 'flex gap-5 absolute left-1/2 transform -translate-x-1/2 translate-y-5 h-auto w-56 pb-4 bg-white rounded '
+                     ? 'flex gap-5 absolute left-1/2 transform -translate-x-1/2 translate-y-5 h-auto w-56 pb-4 bg-white rounded mt-12 '
                      : 'hidden'
-               } sm:flex flex-col justify-between h-screen w-48 shrink-0 md:w-60 z-50`}
+               } sm:flex flex-col justify-between h-full w-48 shrink-0 md:w-60 z-50`}
             >
                <section>
                   <p className="pl-3 my-4 text-xs uppercase font-medium tracking-widest text-mediumGrey">All Boards(1)</p>
