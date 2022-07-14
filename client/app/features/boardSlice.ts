@@ -5,13 +5,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface IBoardState {
    isHide: boolean
    isLightbox: boolean
-   isModal: boolean
+   isAddBoard: boolean
 }
 
 const initialState: IBoardState = {
    isHide: false,
    isLightbox: false,
-   isModal: false,
+   isAddBoard: false,
 }
 
 export const boardSlice = createSlice({
@@ -24,12 +24,12 @@ export const boardSlice = createSlice({
       setIsLightbox: (state, action: PayloadAction<boolean>) => {
          state.isLightbox = action.payload
       },
-      setIsModal: (state, action: PayloadAction<boolean>) => {
-         state.isModal = action.payload
+      setIsAddBoard: (state, action: PayloadAction<boolean>) => {
+         state.isAddBoard = action.payload
       },
    },
 })
 
-export const { setIsHide, setIsLightbox, setIsModal } = boardSlice.actions
+export const { setIsHide, setIsLightbox, setIsAddBoard } = boardSlice.actions
 
 export default boardSlice.reducer

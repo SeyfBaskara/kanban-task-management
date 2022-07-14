@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsModal, setIsHide, setIsLightbox } from 'app/features/boardSlice'
+import { setIsAddBoard, setIsHide } from 'app/features/boardSlice'
 
 const SideBar: React.FC = () => {
    const { isHide } = useAppSelector((state) => state.board)
@@ -18,8 +18,7 @@ const SideBar: React.FC = () => {
 
    const handleCreateBoard = () => {
       dispatch(setIsHide(false))
-      dispatch(setIsLightbox(false))
-      dispatch(setIsModal(true))
+      dispatch(setIsAddBoard(true))
    }
 
    return (
