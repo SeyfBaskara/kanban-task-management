@@ -12,7 +12,7 @@ const BoardSchema = new Schema<IBoard>({
       required: true,
       unique: true,
    },
-   columns: [{ type: String, unique: true, ref: 'Column' }],
+   columns: [{ type: String, ref: 'Column' }],
 })
 
 BoardSchema.pre('deleteOne', { document: true }, async function (next: any) {
