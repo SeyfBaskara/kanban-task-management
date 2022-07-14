@@ -27,7 +27,7 @@ const SideBar: React.FC = () => {
             <section
                className={`${
                   isHide
-                     ? 'flex gap-5 absolute left-1/2 transform -translate-x-1/2 translate-y-5 h-auto w-56 pb-4 bg-white rounded mt-12 '
+                     ? 'flex gap-5 absolute left-1/2 transform -translate-x-1/2 translate-y-5 h-auto w-56 pb-4 bg-white rounded '
                      : 'hidden'
                } sm:flex flex-col justify-between h-full w-48 shrink-0 md:w-60 z-50`}
             >
