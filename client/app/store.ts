@@ -1,5 +1,5 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-
+import { configureStore, ThunkAction, Action, Store } from '@reduxjs/toolkit'
+import { createWrapper } from 'next-redux-wrapper'
 import boardReducer from './features/boardSlice'
 
 export function makeStore() {
@@ -12,8 +12,9 @@ export function makeStore() {
 
 const store = makeStore()
 
+export type AppStore = ReturnType<typeof makeStore>
 export type AppState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppState, unknown, Action<string>>
 
-export default store
+export const wrapper = createWrapper<AppStore>(makeStore)

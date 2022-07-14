@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsAddBoard, setIsLightbox } from 'app/features/boardSlice'
+import { setIsAddBoard, setIsLightbox, addBoard } from 'app/features/boardSlice'
 
 const AddBoard: React.FC = () => {
-   const [board, setBoard] = useState('')
+   const [name, setName] = useState<string>('')
    const { isAddBoard } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
@@ -15,6 +15,8 @@ const AddBoard: React.FC = () => {
    const handleCreateNewBoard = () => {
       dispatch(setIsAddBoard(false))
       dispatch(setIsLightbox(false))
+      dispatch(addBoard({ name }))
+      setName('')
    }
 
    const handleCloseAddBoardModal = () => {
@@ -41,8 +43,8 @@ const AddBoard: React.FC = () => {
                   className="border-2 p-1 text-sm rounded"
                   type="text"
                   placeholder="e.g Web design"
-                  value={board}
-                  onChange={(e) => setBoard(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                />
             </form>
          </div>

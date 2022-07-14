@@ -1,8 +1,10 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Board from 'components/Board'
+import { wrapper } from 'app/store'
 import AddBoard from 'components/screenModals/AddBoard'
 import { useAppSelector } from 'app/hooks'
+import { addBoard } from 'app/features/boardSlice'
 
 const Home: NextPage = () => {
    const { isHide, isLightbox } = useAppSelector((state) => state.board)
@@ -28,5 +30,13 @@ const Home: NextPage = () => {
       </div>
    )
 }
+
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async (): Promise<any> => {
+   const response = await fetch('http://localhost:5000/api/board')
+
+   const data = await response.json()
+
+   store.dispatch(addBoard(data))
+})
 
 export default Home

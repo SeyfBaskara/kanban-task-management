@@ -1,17 +1,19 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-// import type { AppState, AppThunk } from '../store'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
+import * as API from 'api/index'
 
 export interface IBoardState {
    isHide: boolean
    isLightbox: boolean
    isAddBoard: boolean
+   boards: IBoards[]
 }
 
 const initialState: IBoardState = {
    isHide: false,
    isLightbox: false,
    isAddBoard: false,
+   boards: [],
 }
 
 export const boardSlice = createSlice({
@@ -27,9 +29,20 @@ export const boardSlice = createSlice({
       setIsAddBoard: (state, action: PayloadAction<boolean>) => {
          state.isAddBoard = action.payload
       },
+      addBoard: (state, action: PayloadAction<IBoards>) => {
+         state.boards = [...state.boards, action.payload]
+      },
+   },
+   extraReducers: {
+      [HYDRATE]: (state, action) => {
+         if (!action.payload.board.boards[0]) {
+            return state
+         }
+         state.boards = action.payload.board.boards[0]
+      },
    },
 })
 
-export const { setIsHide, setIsLightbox, setIsAddBoard } = boardSlice.actions
+export const { setIsHide, setIsLightbox, setIsAddBoard, addBoard } = boardSlice.actions
 
 export default boardSlice.reducer

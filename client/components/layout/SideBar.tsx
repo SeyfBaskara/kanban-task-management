@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { setIsAddBoard, setIsHide } from 'app/features/boardSlice'
 
 const SideBar: React.FC = () => {
-   const { isHide } = useAppSelector((state) => state.board)
+   const { isHide, boards } = useAppSelector((state) => state.board)
    const [isSidebar, setIsSidebar] = useState<boolean>(false)
    const dispatch = useAppDispatch()
 
@@ -33,14 +33,17 @@ const SideBar: React.FC = () => {
             >
                <section>
                   <p className="pl-3 my-4 text-xs uppercase font-medium tracking-widest text-mediumGrey">All Boards(1)</p>
-                  <div className="mr-3 mb-2">
-                     <div className="flex p-2 pl-3 gap-3 items-center bg-purple rounded-r-full">
-                        <div className="relative w-4 h-4">
-                           <Image src="/assets/icon-board.svg" alt="board icon" layout="fill" />
+                  {boards.map((board, index) => (
+                     <div className="mr-3 mb-2" key={index}>
+                        <div className={`flex p-2 pl-3 gap-3 items-center ${index === 0 && ' bg-purple'} rounded-r-full`}>
+                           <div className="relative w-4 h-4">
+                              <Image src="/assets/icon-board.svg" alt="board icon" layout="fill" />
+                           </div>
+                           <p className={`${index === 0 ? 'text-white' : 'text-mediumGrey'}`}>{board.name}</p>
                         </div>
-                        <p className="text-white">Platform Launch</p>
                      </div>
-                  </div>
+                  ))}
+
                   <button className="flex items-center gap-3 pl-3 text-sm text-purple" onClick={handleCreateBoard}>
                      <div className="relative w-4 h-4">
                         <Image src="/assets/icon-board.svg" alt="board icon" layout="fill" />
