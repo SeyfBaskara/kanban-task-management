@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsAddBoard, setIsLightbox, addBoard } from 'app/features/boardSlice'
+import { setIsAddBoard, setIsLightbox, createBoard } from 'app/features/boardSlice'
 
 const AddBoard: React.FC = () => {
    const [name, setName] = useState<string>('')
@@ -15,7 +15,7 @@ const AddBoard: React.FC = () => {
    const handleCreateNewBoard = () => {
       dispatch(setIsAddBoard(false))
       dispatch(setIsLightbox(false))
-      dispatch(addBoard({ name }))
+      dispatch(createBoard({ name }))
       setName('')
    }
 

@@ -16,6 +16,15 @@ const initialState: IBoardState = {
    boards: [],
 }
 
+interface IBoardProp {
+   name: string
+}
+
+export const createBoard = createAsyncThunk('createBoard', async (newboard: IBoardProp, thunkAPI) => {
+   const { data } = await API.createBoard(newboard)
+   return data
+})
+
 export const boardSlice = createSlice({
    name: 'board',
    initialState,
@@ -39,6 +48,9 @@ export const boardSlice = createSlice({
             return state
          }
          state.boards = action.payload.board.boards[0]
+      },
+      [createBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProp>) => {
+         state.boards = [...state.boards, action.payload]
       },
    },
 })
