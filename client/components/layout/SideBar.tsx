@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsAddBoard, setIsHide } from 'app/features/boardSlice'
+import { setIsAddBoard, setIsHide, setIsLightbox } from 'app/features/boardSlice'
 
 const SideBar: React.FC = () => {
    const { isHide, boards } = useAppSelector((state) => state.board)
@@ -19,6 +19,7 @@ const SideBar: React.FC = () => {
    const handleCreateBoard = () => {
       dispatch(setIsHide(false))
       dispatch(setIsAddBoard(true))
+      dispatch(setIsLightbox(true))
    }
 
    return (
@@ -32,7 +33,9 @@ const SideBar: React.FC = () => {
                } sm:flex flex-col justify-between h-full w-48 shrink-0 md:w-60 z-50`}
             >
                <section>
-                  <p className="pl-3 my-4 text-xs uppercase font-medium tracking-widest text-mediumGrey">All Boards(1)</p>
+                  <p className="pl-3 my-4 text-xs uppercase font-medium tracking-widest text-mediumGrey">
+                     All Boards({boards.length})
+                  </p>
                   {boards.map((board, index) => (
                      <div className="mr-3 mb-2" key={index}>
                         <div className={`flex p-2 pl-3 gap-3 items-center ${index === 0 && ' bg-purple'} rounded-r-full`}>

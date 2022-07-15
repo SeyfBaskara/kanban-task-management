@@ -4,7 +4,7 @@ import { setIsHide, setIsLightbox } from 'app/features/boardSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 
 const Header: React.FC = () => {
-   const { isHide, isLightbox } = useAppSelector((state) => state.board)
+   const { isHide, isLightbox, boards } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
    const handleSidebar = () => {
@@ -36,11 +36,15 @@ const Header: React.FC = () => {
                </div>
             </div>
             <div className="flex gap-1 items-center sm:gap-4 md:mr-3">
-               <div className="bg-purple w-12 rounded-full text-center p-1 opacity-40 sm:hidden">
+               <div className={`bg-purple w-12 rounded-full text-center p-1 ${boards.length === 0 && 'opacity-40'} sm:hidden`}>
                   <Image src="/assets/icon-add-task-mobile.svg" alt="add icon" width={12} height={12} />
                </div>
                <div>
-                  <button className="hidden rounded-full bg-purple py-2 px-3 text-white text-xs opacity-40 sm:block">
+                  <button
+                     className={`hidden rounded-full bg-purple py-2 px-3 text-white text-xs ${
+                        boards.length === 0 && 'opacity-40'
+                     } sm:block`}
+                  >
                      +Add New Task
                   </button>
                </div>

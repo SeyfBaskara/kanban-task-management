@@ -21,7 +21,7 @@ const Home: NextPage = () => {
                isLightbox && isHide
                   ? 'fixed w-full h-full top-14 bg-black opacity-30 z-40'
                   : isLightbox
-                  ? 'fixed w-full h-full bg-black opacity-30 z-40'
+                  ? 'fixed w-full h-full left-0 bg-black opacity-30 z-40'
                   : ''
             }`}
          ></div>
