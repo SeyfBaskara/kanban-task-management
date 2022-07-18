@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
-import { setIsHide, setIsLightbox } from 'app/features/boardSlice'
+import { setIsHide, setIsLightbox, setIsDeleteBoard } from 'app/features/boardSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 
 const Header: React.FC = () => {
-   const { isHide, isLightbox, boards } = useAppSelector((state) => state.board)
+   const [isModalOptions, setIsModalOptions] = useState<boolean>(false)
+   const { isHide, isLightbox, boards, isSelected } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
    const handleSidebar = () => {
       dispatch(setIsHide(!isHide))
       dispatch(setIsLightbox(!isLightbox))
+   }
+
+   const handleScreenModals = () => {
+      setIsModalOptions(!isModalOptions)
    }
 
    return (
@@ -25,7 +30,7 @@ const Header: React.FC = () => {
                   <Image src="/assets/logo-mobile.svg" alt="logo" width={24} height={25} />
                </div>
                <div className="flex gap-2">
-                  <h3 className="font-bold">Platform Launch</h3>
+                  <h3 className="font-bold">{boards[isSelected].name}</h3>
                   <div className="sm:hidden" onClick={handleSidebar}>
                      {isHide ? (
                         <Image src="/assets/icon-chevron-up.svg" alt="chevron icon" width={10} height={7} />
@@ -35,7 +40,7 @@ const Header: React.FC = () => {
                   </div>
                </div>
             </div>
-            <div className="flex gap-1 items-center sm:gap-4 md:mr-3">
+            <div className="flex gap-2 items-center sm:gap-4 md:mr-3">
                <div className={`bg-purple w-12 rounded-full text-center p-1 ${boards.length === 0 && 'opacity-40'} sm:hidden`}>
                   <Image src="/assets/icon-add-task-mobile.svg" alt="add icon" width={12} height={12} />
                </div>
@@ -48,11 +53,19 @@ const Header: React.FC = () => {
                      +Add New Task
                   </button>
                </div>
-               <div className="relative w-1.5 h-5">
+               <div className="relative w-1.5 h-5" onClick={handleScreenModals}>
                   <Image src="/assets/icon-vertical-ellipsis.svg" alt="ellipsis icon" layout="fill" />
                </div>
             </div>
          </section>
+         {isModalOptions && (
+            <section className="fixed right-2 top-16 flex flex-col w-40 gap-1 pl-2 bg-white rounded">
+               <button className="text-left p-1 w-3/4">Edit Board</button>
+               <button className="text-left p-1 w-3/4" onClick={() => dispatch(setIsDeleteBoard(true))}>
+                  Delete Board
+               </button>
+            </section>
+         )}
       </header>
    )
 }

@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsAddBoard, setIsHide, setIsLightbox } from 'app/features/boardSlice'
+import { setIsAddBoard, setIsHide, setIsLightbox, setIsSelected } from 'app/features/boardSlice'
 
 const SideBar: React.FC = () => {
-   const [isSelected, setIsSelected] = useState<number>(0)
-   const { isHide, boards } = useAppSelector((state) => state.board)
+   const { isHide, boards, isSelected } = useAppSelector((state) => state.board)
    const [isSidebar, setIsSidebar] = useState<boolean>(false)
    const dispatch = useAppDispatch()
 
@@ -39,7 +38,12 @@ const SideBar: React.FC = () => {
                   </p>
                   {boards.map((board, index) => (
                      <div className="mr-3 mb-2" key={index}>
-                        <div className={`flex p-2 pl-3 gap-3 items-center ${isSelected === index ? 'bg-purple' : ''} rounded-r-full`} onClick={() => setIsSelected(index)}>
+                        <div
+                           className={`flex p-2 pl-3 gap-3 items-center ${
+                              isSelected === index ? 'bg-purple' : ''
+                           } rounded-r-full`}
+                           onClick={() => dispatch(setIsSelected(index))}
+                        >
                            <div className="relative w-4 h-4">
                               <Image src="/assets/icon-board.svg" alt="board icon" layout="fill" />
                            </div>
