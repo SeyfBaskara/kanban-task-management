@@ -1,23 +1,48 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { setIsAddBoard, setIsLightbox, createBoard } from 'app/features/boardSlice'
 
+interface ICloumnState {
+   name: string
+}
+
 const AddBoard: React.FC = () => {
    const [name, setName] = useState<string>('')
+   const [inputFields, setInputFields] = useState<ICloumnState[]>([{ name: '' }])
    const { isAddBoard } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
    const handleCreateNewBoard = () => {
-      dispatch(setIsAddBoard(false))
-      dispatch(setIsLightbox(false))
-      dispatch(createBoard({ name }))
-      setName('')
+      if (name !== '') {
+         dispatch(setIsAddBoard(false))
+         dispatch(setIsLightbox(false))
+         dispatch(createBoard({ name }))
+         setName('')
+      }
    }
 
    const handleCloseAddBoardModal = () => {
       dispatch(setIsAddBoard(false))
       dispatch(setIsLightbox(false))
+   }
+
+   const handleAddNewColumn = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      const newfield = { name: '' }
+      setInputFields([...inputFields, newfield])
+   }
+
+   const handleRemoveInputField = (index: number) => {
+      let data = [...inputFields]
+      data.splice(index, 1)
+      setInputFields(data)
+   }
+
+   const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+      let data: any = [...inputFields]
+      data[index][event.target.name] = event.target.value
+      setInputFields(data)
    }
 
    return (
@@ -41,63 +66,41 @@ const AddBoard: React.FC = () => {
                   placeholder="e.g Web design"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
                />
             </form>
          </div>
-         <ColumnInputField/>
+         <div>
+            <form className="flex flex-col gap-2" onSubmit={handleAddNewColumn} autoComplete="off">
+               <label className="text-sm text-mediumGrey">Board Cloumns</label>
+               {inputFields.map((input, index) => {
+                  return (
+                     <div className="flex gap-3 items-center " key={index}>
+                        <input
+                           type="text"
+                           className="border-2 w-full p-1 rounded"
+                           value={input.name}
+                           autoComplete="off"
+                           name="name"
+                           onChange={(e) => handleInputChange(index, e)}
+                        />
+                        <div className="relative w-4 h-4" onClick={() => handleRemoveInputField(index)}>
+                           <Image src="/assets/icon-cross.svg" alt="cross delete icon" layout="fill" />
+                        </div>
+                     </div>
+                  )
+               })}
+               <button type="submit" className="p-1.5 text-purple bg-linesLight rounded-full mt-1">
+                  +Add New Column
+               </button>
+            </form>
+         </div>
          <div>
             <button className="p-1.5 text-white bg-purple rounded-full w-full" onClick={handleCreateNewBoard}>
                Create New Board
             </button>
          </div>
       </section>
-   )
-}
-
-
-const ColumnInputField : React.FC = () => {
-   const [inputFields, setInputFields] = useState<any>([{name: ''}])
-
-   const handleAddNewColumn = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault()
-      const newfield = { name: ''}
-      setInputFields([...inputFields, newfield])
-   }
-
-   const handleRemoveInputField = (index:number) => {
-      let data = [...inputFields];
-      data.splice(index, 1)
-      setInputFields(data)
-   }
-
-   const handleInputChange = (index:number, event:React.ChangeEvent<HTMLInputElement>) => {
-      let data = [...inputFields];
-      data[index][event.target.name] = event.target.value;
-      setInputFields(data);
-   }
-
-   return (
-         <form className="flex flex-col gap-2" onSubmit={handleAddNewColumn} autoComplete='off' >
-            <label className="text-sm text-mediumGrey">Board Cloumns</label>
-         {inputFields.map((input:any, index:number) => {
-            return (
-               <div className="flex gap-3 items-center " key={index} >
-                  <input type="text" list="tasks" className="border-2 w-full p-1 rounded " autoComplete='off' name='name' onChange={(e) => handleInputChange(index, e)}/>
-                  <datalist id="tasks">
-                     <option value='Todo' />
-                     <option value='Doing' />
-                     <option value='Done' />
-                  </datalist>
-                  <div className="relative w-4 h-4" onClick={() => handleRemoveInputField(index)}>
-                     <Image src="/assets/icon-cross.svg" alt="cross delete icon" layout="fill" />
-                  </div>
-               </div>
-            )
-         })}
-            <button type="submit" className="p-1.5 text-purple bg-linesLight rounded-full mt-1">
-               +Add New Column
-            </button>
-      </form>
    )
 }
 
