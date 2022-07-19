@@ -37,7 +37,7 @@ const SideBar: React.FC = () => {
                      All Boards({boards.length})
                   </p>
                   {boards.map((board, index, arr) => (
-                     <div className="mr-3 mb-2" key={index}>
+                     <div className="mr-3 mb-2 cursor-pointer" key={index}>
                         <div
                            className={`flex p-2 pl-3 gap-3 items-center ${
                               isSelected === index ? 'bg-purple' : ''

@@ -59,7 +59,7 @@ const Header: React.FC = () => {
                      +Add New Task
                   </button>
                </div>
-               <div className="relative w-1.5 h-5" onClick={handleScreenModals}>
+               <div className="relative w-1.5 h-5 cursor-pointer" onClick={handleScreenModals}>
                   <Image src="/assets/icon-vertical-ellipsis.svg" alt="ellipsis icon" layout="fill" />
                </div>
             </div>
