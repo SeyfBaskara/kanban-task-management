@@ -36,7 +36,7 @@ const SideBar: React.FC = () => {
                   <p className="pl-3 my-4 text-xs uppercase font-medium tracking-widest text-mediumGrey">
                      All Boards({boards.length})
                   </p>
-                  {boards.map((board, index) => (
+                  {boards.map((board, index, arr) => (
                      <div className="mr-3 mb-2" key={index}>
                         <div
                            className={`flex p-2 pl-3 gap-3 items-center ${

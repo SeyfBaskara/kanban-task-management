@@ -36,7 +36,7 @@ const Header: React.FC = () => {
                   <Image src="/assets/logo-mobile.svg" alt="logo" width={24} height={25} />
                </div>
                <div className="flex gap-2">
-                  <h3 className="font-bold">{boards[isSelected].name}</h3>
+                  <h3 className="font-bold">{isSelected !== undefined ? boards[isSelected]?.name : boards[0]?.name}</h3>
                   <div className="sm:hidden" onClick={handleSidebar}>
                      {isHide ? (
                         <Image src="/assets/icon-chevron-up.svg" alt="chevron icon" width={10} height={7} />

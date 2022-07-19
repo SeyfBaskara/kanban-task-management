@@ -1,4 +1,4 @@
 interface IBoards {
    name: string
-   id?: string
+   id: string
 }

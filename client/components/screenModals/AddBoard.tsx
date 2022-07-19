@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsAddBoard, setIsLightbox, createBoard } from 'app/features/boardSlice'
+import { setIsAddBoard, setIsLightbox, createBoard, setIsSelected } from 'app/features/boardSlice'
 
 interface ICloumnState {
    name: string
@@ -10,15 +10,16 @@ interface ICloumnState {
 const AddBoard: React.FC = () => {
    const [name, setName] = useState<string>('')
    const [inputFields, setInputFields] = useState<ICloumnState[]>([{ name: '' }])
-   const { isAddBoard } = useAppSelector((state) => state.board)
+   const { isAddBoard, boards } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
    const handleCreateNewBoard = () => {
       if (name !== '') {
          dispatch(setIsAddBoard(false))
          dispatch(setIsLightbox(false))
-         dispatch(createBoard({ name }))
+         dispatch(createBoard({ name, id: '' }))
          setName('')
+         dispatch(setIsSelected(boards.length))
       }
    }
 

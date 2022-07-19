@@ -1,14 +1,16 @@
 import React from 'react'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsDeleteBoard, setIsLightbox } from 'app/features/boardSlice'
+import { setIsDeleteBoard, setIsLightbox, deleteBoard, setIsSelected } from 'app/features/boardSlice'
 
 const DeleteBoard: React.FC = () => {
    const { isDeleteBoard, boards, isSelected } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
    const handleDeleteBoard = () => {
+      dispatch(deleteBoard(boards[isSelected].id))
       dispatch(setIsDeleteBoard(false))
       dispatch(setIsLightbox(false))
+      dispatch(setIsSelected(0))
    }
 
    const handleCancelDeleteBoard = () => {
@@ -27,7 +29,7 @@ const DeleteBoard: React.FC = () => {
          <div className="flex flex-col gap-5">
             <h1 className="font-bold text-xl text-red">Delete this board?</h1>
             <p className="text-mediumGrey text-sm">
-               Are you sure you want to delete the '{boards[isSelected].name}' board? This action will remove all columns and
+               Are you sure you want to delete the '{boards[isSelected]?.name}' board? This action will remove all columns and
                tasks and cannot be reversed.
             </p>
          </div>
