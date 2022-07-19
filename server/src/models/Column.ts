@@ -24,5 +24,13 @@ ColumnSchema.pre('deleteOne', { document: true }, async function (next) {
    next()
 })
 
+ColumnSchema.set('toJSON', {
+   transform: function (_doc, ret, _options) {
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+   },
+})
+
 const Column = model<IColumn>('Column', ColumnSchema)
 export default Column

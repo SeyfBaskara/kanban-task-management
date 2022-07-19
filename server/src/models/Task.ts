@@ -29,5 +29,13 @@ TaskSchema.pre('deleteOne', { document: true }, async function (next: any) {
    next()
 })
 
+TaskSchema.set('toJSON', {
+   transform: function (_doc, ret, _options) {
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+   },
+})
+
 const Task = model<ITask>('Task', TaskSchema)
 export default Task

@@ -22,5 +22,13 @@ BoardSchema.pre('deleteOne', { document: true }, async function (next: any) {
    next()
 })
 
+BoardSchema.set('toJSON', {
+   transform: function (_doc, ret, _options) {
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+   },
+})
+
 const Board = model<IBoard>('Board', BoardSchema)
 export default Board

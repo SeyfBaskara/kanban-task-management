@@ -22,6 +22,13 @@ const SubTaskSchema = new Schema<ISubTask>({
    },
 })
 
-const SubTask = model<ISubTask>('SubTask', SubTaskSchema)
+SubTaskSchema.set('toJSON', {
+   transform: function (_doc, ret, _options) {
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+   },
+})
 
+const SubTask = model<ISubTask>('SubTask', SubTaskSchema)
 export default SubTask
