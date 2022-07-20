@@ -3,9 +3,9 @@ import { AppError, HttpCode } from '../utils/AppError'
 import Board from '../models/Board'
 
 export const createBoard = async (req: Request, res: Response, next: NextFunction) => {
-   const { name } = req.body
+   const { name, boardID } = req.body
 
-   const newBoard = new Board({ name })
+   const newBoard = new Board({ name, boardID })
 
    try {
       await newBoard.save()

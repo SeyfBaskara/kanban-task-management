@@ -11,7 +11,7 @@ router.delete('/delete/:id', deleteBoard)
 router.patch('/update/:id', updateBoard)
 
 // Column routers
-router.post('/create/column/:id', createColumn)
+router.post('/create/column', createColumn)
 router.delete('/delete/column/:id', deleteColumn)
 router.patch('/update/column/:id', updateColumn)
 

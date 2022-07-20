@@ -12,6 +12,9 @@ const BoardSchema = new Schema<IBoard>({
       required: true,
       unique: true,
    },
+   boardID: {
+      type: String,
+   },
    columns: [{ type: String, ref: 'Column' }],
 })
 
