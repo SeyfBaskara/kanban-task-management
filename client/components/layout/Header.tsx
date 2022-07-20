@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { setIsHide, setIsLightbox, setIsDeleteBoard } from 'app/features/boardSlice'
+import { setIsHide, setIsLightbox, setIsDeleteBoard, setIsEditBoard } from 'app/features/boardSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 
 const Header: React.FC = () => {
@@ -19,6 +19,12 @@ const Header: React.FC = () => {
 
    const handleShowDeleteBoard = () => {
       dispatch(setIsDeleteBoard(true))
+      dispatch(setIsLightbox(true))
+      setIsModalOptions(false)
+   }
+
+   const handleShowEditBoard = () => {
+      dispatch(setIsEditBoard(true))
       dispatch(setIsLightbox(true))
       setIsModalOptions(false)
    }
@@ -66,7 +72,9 @@ const Header: React.FC = () => {
          </section>
          {isModalOptions && (
             <section className="fixed right-2 top-16 flex flex-col w-40 gap-1 pl-2 bg-white rounded">
-               <button className="text-left p-1 w-3/4">Edit Board</button>
+               <button className="text-left p-1 w-3/4" onClick={handleShowEditBoard}>
+                  Edit Board
+               </button>
                <button className="text-left p-1 w-3/4" onClick={handleShowDeleteBoard}>
                   Delete Board
                </button>

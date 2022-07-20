@@ -2,8 +2,10 @@ import type { NextPage, GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Board from 'components/Board'
 import { wrapper } from 'app/store'
+
 import AddBoard from 'components/screenModals/AddBoard'
 import DeleteBoard from 'components/screenModals/DeleteBoard'
+import EditBoard from 'components/screenModals/EditBoard'
 
 import { useAppSelector } from 'app/hooks'
 import { addBoard } from 'app/features/boardSlice'
@@ -30,6 +32,7 @@ const Home: NextPage = () => {
          <Board />
          <AddBoard />
          <DeleteBoard />
+         <EditBoard />
       </div>
    )
 }
