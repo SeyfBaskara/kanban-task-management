@@ -14,7 +14,7 @@ const EditBoard: React.FC = () => {
    const dispatch = useAppDispatch()
 
    useEffect(() => {
-      setName(boards[isSelected].name)
+      setName(boards[isSelected]?.name)
    }, [isSelected])
 
    const handleEditBoard = () => {

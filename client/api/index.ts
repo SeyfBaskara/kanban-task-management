@@ -5,6 +5,7 @@ const url = 'http://localhost:5000/api/board'
 interface IProps {
    name: string
    id?: string
+   boardID?: string
 }
 
 export const fetchBoards = () => axios.get(url)

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { v4 as uuidv4 } from 'uuid'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { setIsAddBoard, setIsLightbox, createBoard, setIsSelected } from 'app/features/boardSlice'
 
@@ -14,10 +15,11 @@ const AddBoard: React.FC = () => {
    const dispatch = useAppDispatch()
 
    const handleCreateNewBoard = () => {
+      const boardID = uuidv4()
       if (name !== '') {
          dispatch(setIsAddBoard(false))
          dispatch(setIsLightbox(false))
-         dispatch(createBoard({ name, id: '' }))
+         dispatch(createBoard({ name, id: '', boardID }))
          setName('')
          dispatch(setIsSelected(boards.length))
       }

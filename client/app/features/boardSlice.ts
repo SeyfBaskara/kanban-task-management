@@ -25,6 +25,7 @@ const initialState: IBoardState = {
 interface IBoardProps {
    name: string
    id: string
+   boardID: string
 }
 
 export const createBoard = createAsyncThunk('createBoard', async (newboard: IBoardProps, thunkAPI) => {
