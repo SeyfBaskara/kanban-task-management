@@ -36,6 +36,14 @@ export const deleteBoard = createAsyncThunk('deleteBoard', async (id: string, th
    return data
 })
 
+export const updateBoard = createAsyncThunk('updateBoard', async (updatedBoard: IBoardProps, thunkAPI) => {
+   const newUpdatedBoard = {
+      name: updatedBoard.name,
+   }
+   const { data } = await API.updateBoard(updatedBoard.id, newUpdatedBoard)
+   return data
+})
+
 export const boardSlice = createSlice({
    name: 'board',
    initialState,
@@ -74,6 +82,16 @@ export const boardSlice = createSlice({
       },
       [deleteBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProps>) => {
          state.boards = state.boards.filter((board) => board.id !== action.payload.id)
+      },
+      [updateBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProps>) => {
+         state.boards = state.boards.map((board) =>
+            board.id === action.payload.id
+               ? {
+                    ...board,
+                    name: action.payload.name,
+                 }
+               : board
+         )
       },
    },
 })

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsEditBoard, setIsLightbox } from 'app/features/boardSlice'
+import { setIsEditBoard, setIsLightbox, updateBoard } from 'app/features/boardSlice'
 
 interface ICloumnState {
    name: string
@@ -18,7 +18,11 @@ const EditBoard: React.FC = () => {
    }, [isSelected])
 
    const handleEditBoard = () => {
-      // edit board
+      if (name !== '') {
+         dispatch(updateBoard({ name, id: boards[isSelected].id }))
+         dispatch(setIsEditBoard(false))
+         dispatch(setIsLightbox(false))
+      }
    }
 
    const handleCloseEditBoardModal = () => {
