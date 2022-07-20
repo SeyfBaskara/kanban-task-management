@@ -22,6 +22,12 @@ const SideBar: React.FC = () => {
       dispatch(setIsLightbox(true))
    }
 
+   const handleSelectedBoard = (index: number) => {
+      dispatch(setIsSelected(index))
+      dispatch(setIsHide(false))
+      dispatch(setIsLightbox(false))
+   }
+
    return (
       <aside className="pt-14">
          {!isSidebar ? (
@@ -42,7 +48,7 @@ const SideBar: React.FC = () => {
                            className={`flex p-2 pl-3 gap-3 items-center ${
                               isSelected === index ? 'bg-purple' : ''
                            } rounded-r-full`}
-                           onClick={() => dispatch(setIsSelected(index))}
+                           onClick={() => handleSelectedBoard(index)}
                         >
                            <div className="relative w-4 h-4">
                               <Image src="/assets/icon-board.svg" alt="board icon" layout="fill" />
