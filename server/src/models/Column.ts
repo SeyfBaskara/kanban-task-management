@@ -9,11 +9,11 @@ const ColumnSchema = new Schema<IColumn>({
    name: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
    },
    boardID: {
       type: String,
+      unique: true,
    },
    tasks: [{ type: String, ref: 'Task' }],
 })

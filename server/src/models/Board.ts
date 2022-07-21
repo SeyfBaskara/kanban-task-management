@@ -19,9 +19,9 @@ const BoardSchema = new Schema<IBoard>({
 })
 
 BoardSchema.pre('deleteOne', { document: true }, async function (next: any) {
-   await Cloumn.deleteMany({ boardID: this._id })
-   await Task.deleteMany({ boardID: this._id })
-   await SubTask.deleteMany({ boardID: this._id })
+   await Cloumn.deleteMany({ boardID: this.boardID })
+   await Task.deleteMany({ boardID: this.boardID })
+   await SubTask.deleteMany({ boardID: this.boardID })
    next()
 })
 
