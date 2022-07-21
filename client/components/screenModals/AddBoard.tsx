@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsAddBoard, setIsLightbox, createBoard, setIsSelected } from 'app/features/boardSlice'
+import { setIsAddBoard, setIsLightbox, createBoard, setIsSelected, createColumn } from 'app/features/boardSlice'
 
 interface ICloumnState {
    name: string
@@ -14,6 +14,14 @@ const AddBoard: React.FC = () => {
    const { isAddBoard, boards } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
+   useEffect(() => {
+      setInputFields([])
+   }, [isAddBoard])
+
+   const handleCreateColumn = (boardID: string) => {
+      inputFields.forEach((input) => dispatch(createColumn({ name: input.name, boardID, id: '' })))
+   }
+
    const handleCreateNewBoard = () => {
       const boardID = uuidv4()
       if (name !== '') {
@@ -22,12 +30,14 @@ const AddBoard: React.FC = () => {
          dispatch(createBoard({ name, id: '', boardID }))
          setName('')
          dispatch(setIsSelected(boards.length))
+         handleCreateColumn(boardID)
       }
    }
 
    const handleCloseAddBoardModal = () => {
       dispatch(setIsAddBoard(false))
       dispatch(setIsLightbox(false))
+      setName('')
    }
 
    const handleAddNewColumn = (e: React.FormEvent<HTMLFormElement>) => {

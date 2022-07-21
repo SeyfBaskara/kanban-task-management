@@ -22,13 +22,7 @@ const initialState: IBoardState = {
    boards: [],
 }
 
-interface IBoardProps {
-   name: string
-   id: string
-   boardID: string
-}
-
-export const createBoard = createAsyncThunk('createBoard', async (newboard: IBoardProps, thunkAPI) => {
+export const createBoard = createAsyncThunk('createBoard', async (newboard: IBoards, thunkAPI) => {
    const { data } = await API.createBoard(newboard)
    return data
 })
@@ -37,11 +31,16 @@ export const deleteBoard = createAsyncThunk('deleteBoard', async (id: string, th
    return data
 })
 
-export const updateBoard = createAsyncThunk('updateBoard', async (updatedBoard: IBoardProps, thunkAPI) => {
+export const updateBoard = createAsyncThunk('updateBoard', async (updatedBoard: IBoards, thunkAPI) => {
    const newUpdatedBoard = {
       name: updatedBoard.name,
    }
    const { data } = await API.updateBoard(updatedBoard.id, newUpdatedBoard)
+   return data
+})
+
+export const createColumn = createAsyncThunk('createColumn', async (newColumn: IColumns, thunkAPI) => {
+   const { data } = await API.createColumn(newColumn)
    return data
 })
 
@@ -78,13 +77,13 @@ export const boardSlice = createSlice({
          }
          state.boards = action.payload.board.boards[0]
       },
-      [createBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProps>) => {
+      [createBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoards>) => {
          state.boards = [...state.boards, action.payload]
       },
-      [deleteBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProps>) => {
+      [deleteBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoards>) => {
          state.boards = state.boards.filter((board) => board.id !== action.payload.id)
       },
-      [updateBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProps>) => {
+      [updateBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoards>) => {
          state.boards = state.boards.map((board) =>
             board.id === action.payload.id
                ? {
@@ -92,6 +91,11 @@ export const boardSlice = createSlice({
                     name: action.payload.name,
                  }
                : board
+         )
+      },
+      [createColumn.fulfilled.toString()]: (state, action: PayloadAction<IColumns>) => {
+         state.boards = state.boards.filter((board) =>
+            board.boardID === action.payload.boardID ? board.columns?.push(action.payload) : board
          )
       },
    },
