@@ -3,12 +3,13 @@ import Head from 'next/head'
 import Board from 'components/Board'
 import { wrapper } from 'app/store'
 
+import { useAppSelector } from 'app/hooks'
+import { addBoard } from 'app/features/boardSlice'
+
 import AddBoard from 'components/screenModals/AddBoard'
 import DeleteBoard from 'components/screenModals/DeleteBoard'
 import EditBoard from 'components/screenModals/EditBoard'
-
-import { useAppSelector } from 'app/hooks'
-import { addBoard } from 'app/features/boardSlice'
+import AddTask from 'components/screenModals/AddTask'
 
 const Home: NextPage = () => {
    const { isHide, isLightbox } = useAppSelector((state) => state.board)
@@ -33,6 +34,7 @@ const Home: NextPage = () => {
          <AddBoard />
          <DeleteBoard />
          <EditBoard />
+         <AddTask />
       </div>
    )
 }

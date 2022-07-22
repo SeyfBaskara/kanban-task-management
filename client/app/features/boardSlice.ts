@@ -6,6 +6,7 @@ export interface IBoardState {
    isHide: boolean
    isLightbox: boolean
    isAddBoard: boolean
+   isAddTask: boolean
    isDeleteBoard: boolean
    isEditBoard: boolean
    isSelected: number
@@ -16,13 +17,25 @@ const initialState: IBoardState = {
    isHide: false,
    isLightbox: false,
    isAddBoard: false,
+   isAddTask: false,
    isDeleteBoard: false,
    isEditBoard: false,
    isSelected: 0,
    boards: [],
 }
 
-export const createBoard = createAsyncThunk('createBoard', async (newboard: IBoards, thunkAPI) => {
+interface IBoardProps {
+   id: string
+   name: string
+   boardID: string
+}
+
+interface IUpdatedBoardProps {
+   id: string
+   name: string
+}
+
+export const createBoard = createAsyncThunk('createBoard', async (newboard: IBoardProps, thunkAPI) => {
    const { data } = await API.createBoard(newboard)
    return data
 })
@@ -31,7 +44,7 @@ export const deleteBoard = createAsyncThunk('deleteBoard', async (id: string, th
    return data
 })
 
-export const updateBoard = createAsyncThunk('updateBoard', async (updatedBoard: IBoards, thunkAPI) => {
+export const updateBoard = createAsyncThunk('updateBoard', async (updatedBoard: IUpdatedBoardProps, thunkAPI) => {
    const newUpdatedBoard = {
       name: updatedBoard.name,
    }
@@ -57,6 +70,9 @@ export const boardSlice = createSlice({
       setIsAddBoard: (state, action: PayloadAction<boolean>) => {
          state.isAddBoard = action.payload
       },
+      setIsAddTask: (state, action: PayloadAction<boolean>) => {
+         state.isAddTask = action.payload
+      },
       setIsDeleteBoard: (state, action: PayloadAction<boolean>) => {
          state.isDeleteBoard = action.payload
       },
@@ -66,7 +82,7 @@ export const boardSlice = createSlice({
       setIsSelected: (state, action: PayloadAction<number>) => {
          state.isSelected = action.payload
       },
-      addBoard: (state, action: PayloadAction<IBoards>) => {
+      addBoard: (state, action: PayloadAction<IBoardProps>) => {
          state.boards = [...state.boards, action.payload]
       },
    },
@@ -77,13 +93,13 @@ export const boardSlice = createSlice({
          }
          state.boards = action.payload.board.boards[0]
       },
-      [createBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoards>) => {
+      [createBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProps>) => {
          state.boards = [...state.boards, action.payload]
       },
-      [deleteBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoards>) => {
+      [deleteBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProps>) => {
          state.boards = state.boards.filter((board) => board.id !== action.payload.id)
       },
-      [updateBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoards>) => {
+      [updateBoard.fulfilled.toString()]: (state, action: PayloadAction<IBoardProps>) => {
          state.boards = state.boards.map((board) =>
             board.id === action.payload.id
                ? {
@@ -101,7 +117,15 @@ export const boardSlice = createSlice({
    },
 })
 
-export const { setIsHide, setIsLightbox, setIsAddBoard, setIsDeleteBoard, setIsEditBoard, setIsSelected, addBoard } =
-   boardSlice.actions
+export const {
+   setIsHide,
+   setIsLightbox,
+   setIsAddBoard,
+   setIsAddTask,
+   setIsDeleteBoard,
+   setIsEditBoard,
+   setIsSelected,
+   addBoard,
+} = boardSlice.actions
 
 export default boardSlice.reducer

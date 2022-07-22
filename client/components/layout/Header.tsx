@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { setIsHide, setIsLightbox, setIsDeleteBoard, setIsEditBoard } from 'app/features/boardSlice'
+import { setIsHide, setIsLightbox, setIsDeleteBoard, setIsEditBoard, setIsAddTask } from 'app/features/boardSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 
 const Header: React.FC = () => {
@@ -27,6 +27,11 @@ const Header: React.FC = () => {
       dispatch(setIsEditBoard(true))
       dispatch(setIsLightbox(true))
       setIsModalOptions(false)
+   }
+
+   const handleAddNewTask = () => {
+      dispatch(setIsAddTask(true))
+      dispatch(setIsLightbox(true))
    }
 
    return (
@@ -61,6 +66,7 @@ const Header: React.FC = () => {
                      className={`hidden rounded-full bg-purple py-2 px-3 text-white text-xs ${
                         boards.length === 0 && 'opacity-40'
                      } sm:block`}
+                     onClick={handleAddNewTask}
                   >
                      +Add New Task
                   </button>
