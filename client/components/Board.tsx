@@ -7,8 +7,15 @@ const Board = () => {
    return (
       <article className="bg-lightGrey h-screen">
          {boards[isSelected].columns?.length !== 0 ? (
-            <div className="flex h-full">
-               <p className="m-auto text-center">Column grid will take a place </p>
+            <div className="flex justify-between h-full mt-16 ">
+               {boards[isSelected].columns?.map((column) => (
+                  <div key={column.id}>
+                     <div>
+                        <h1>{column.name}</h1>
+                     </div>
+                  </div>
+               ))}
+               {/* <p className="m-auto text-center">Column grid will take a place </p> */}
             </div>
          ) : (
             <div className="flex h-full">
