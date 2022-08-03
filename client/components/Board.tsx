@@ -9,7 +9,7 @@ const Board = () => {
          {boards[isSelected]?.columns?.length !== 0 ? (
             <div className="flex h-full mt-16 overflow-x-auto gap-2">
                {boards[isSelected]?.columns?.map((column) => (
-                  <div key={column.id} className="w-64">
+                  <div key={column.id} className="w-64 p-2">
                      <div className="flex gap-3 items-center">
                         <div
                            className={`${
@@ -24,9 +24,11 @@ const Board = () => {
                         ></div>
                         <h1 className="uppercase text-sm font-semibold text-mediumGrey">{column.name} (2)</h1>
                      </div>
-                     <div>
-                        <p>this is one the task</p>
-                        <p>another task to do</p>
+                     <div className="mt-3">
+                        <div className="bg-white rounded p-2">
+                           <p className="font-bold">Build UI for search</p>
+                           <p className="text-mediumGrey text-sm">0 of 3 subtasks</p>
+                        </div>
                      </div>
                   </div>
                ))}
