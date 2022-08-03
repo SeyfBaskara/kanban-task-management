@@ -6,16 +6,30 @@ const Board = () => {
 
    return (
       <article className="bg-lightGrey h-screen">
-         {boards[isSelected].columns?.length !== 0 ? (
-            <div className="flex justify-between h-full mt-16 ">
-               {boards[isSelected].columns?.map((column) => (
-                  <div key={column.id}>
+         {boards[isSelected]?.columns?.length !== 0 ? (
+            <div className="flex h-full mt-16 overflow-x-auto gap-2">
+               {boards[isSelected]?.columns?.map((column) => (
+                  <div key={column.id} className="w-64">
+                     <div className="flex gap-3 items-center">
+                        <div
+                           className={`${
+                              column.name === 'todo'
+                                 ? 'bg-todoColor'
+                                 : column.name === 'doing'
+                                 ? 'bg-doingColor'
+                                 : column.name === 'done'
+                                 ? 'bg-doneColor'
+                                 : 'bg-red'
+                           } rounded-full w-3 h-3`}
+                        ></div>
+                        <h1 className="uppercase text-sm font-semibold text-mediumGrey">{column.name} (2)</h1>
+                     </div>
                      <div>
-                        <h1>{column.name}</h1>
+                        <p>this is one the task</p>
+                        <p>another task to do</p>
                      </div>
                   </div>
                ))}
-               {/* <p className="m-auto text-center">Column grid will take a place </p> */}
             </div>
          ) : (
             <div className="flex h-full">
