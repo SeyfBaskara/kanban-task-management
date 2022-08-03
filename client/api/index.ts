@@ -1,11 +1,17 @@
 import axios from 'axios'
 
 const url = 'http://localhost:5000/api/board'
+const urlTask = 'http://localhost:5000/api/task'
 
 interface IProps {
    name: string
    id?: string
    boardID?: string
+}
+interface ITaskProps {
+   title: string
+   description: string
+   status: string
 }
 
 // BOARDS
@@ -16,3 +22,6 @@ export const updateBoard = (id: string, updateBoard: IProps) => axios.patch(`${u
 
 // COLUMNS
 export const createColumn = (newColumn: IProps) => axios.post(`${url}/create/column`, newColumn)
+
+//TASKS
+export const createTask = (newTask: ITaskProps) => axios.post(`${urlTask}/create`, newTask)

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { HYDRATE } from 'next-redux-wrapper'
 import * as API from 'api/index'
+import { takeCoverage } from 'v8'
 
 export interface IBoardState {
    isHide: boolean
@@ -54,6 +55,11 @@ export const updateBoard = createAsyncThunk('updateBoard', async (updatedBoard: 
 
 export const createColumn = createAsyncThunk('createColumn', async (newColumn: IColumns, thunkAPI) => {
    const { data } = await API.createColumn(newColumn)
+   return data
+})
+
+export const createTask = createAsyncThunk('createTask', async (newTask: ITasks, thunkAPI) => {
+   const { data } = await API.createTask(newTask)
    return data
 })
 
@@ -113,6 +119,11 @@ export const boardSlice = createSlice({
          state.boards = state.boards.filter((board) =>
             board.boardID === action.payload.boardID ? board.columns?.push(action.payload) : board
          )
+      },
+      [createTask.fulfilled.toString()]: (state, action: PayloadAction<ITasks>) => {
+         // state.boards = state.boards[state.isSelected].columns?.filter((column) =>
+         //    column.name === action.payload.status ? column.tasks?.push(action.payload) : column
+         // ) //FIXME need to implement correct state mutations
       },
    },
 })

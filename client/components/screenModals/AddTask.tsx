@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsAddTask, setIsLightbox } from 'app/features/boardSlice'
+import { setIsAddTask, setIsLightbox, createTask } from 'app/features/boardSlice'
 
 interface ISubtaskState {
    name: string
 }
 
+interface ITaskInputs {
+   title: string
+   description: string
+   status: string
+}
+
 const AddTask: React.FC = () => {
-   const [name, setName] = useState<string>('')
+   const [taskInput, setTaskInput] = useState<ITaskInputs>({ title: '', description: '', status: '' })
    const [inputFields, setInputFields] = useState<ISubtaskState[]>([{ name: '' }])
-   const { isAddTask } = useAppSelector((state) => state.board)
+   const { isAddTask, isSelected } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
    useEffect(() => {
@@ -19,12 +25,20 @@ const AddTask: React.FC = () => {
 
    const handleCreateNewTask = () => {
       // Create Task
+      dispatch(createTask({ title: taskInput.title, description: taskInput.description, status: taskInput.status }))
+      dispatch(setIsAddTask(false))
+      dispatch(setIsLightbox(false))
+      setTaskInput({ title: '', description: '', status: '' })
+   }
+   const handleTaskOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target
+      setTaskInput({ ...taskInput, [name]: value })
    }
 
    const handleCloseAddTaskModal = () => {
       dispatch(setIsAddTask(false))
       dispatch(setIsLightbox(false))
-      setName('')
+      setTaskInput({ title: '', description: '', status: '' })
    }
 
    const handleAddNewSubtask = (e: React.FormEvent<HTMLFormElement>) => {
@@ -63,9 +77,10 @@ const AddTask: React.FC = () => {
                <input
                   className="border-2 p-1 text-sm rounded"
                   type="text"
+                  name="title"
                   placeholder="e.g Take coffe break"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={taskInput.title}
+                  onChange={handleTaskOnChange}
                   required
                />
                <label className="text-sm text-mediumGrey mb-1.5 mt-6">Description</label>
@@ -74,8 +89,9 @@ const AddTask: React.FC = () => {
                   placeholder="e.g. It’s always good to take a break. This 
                   15 minute break will  recharge the batteries 
                   a little."
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="description"
+                  value={taskInput.description}
+                  onChange={handleTaskOnChange}
                   required
                />
             </form>
@@ -112,9 +128,10 @@ const AddTask: React.FC = () => {
                <input
                   className="border-2 p-1 text-sm rounded"
                   type="text"
+                  name="status"
                   placeholder="Todo"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={taskInput.status}
+                  onChange={handleTaskOnChange}
                   required
                />
             </form>

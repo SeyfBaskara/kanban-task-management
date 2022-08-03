@@ -9,4 +9,11 @@ interface IColumns {
    id: string
    name: string
    boardID: string
+   tasks?: ITasks[]
+}
+
+interface ITasks {
+   title: string
+   description: string
+   status: string
 }
