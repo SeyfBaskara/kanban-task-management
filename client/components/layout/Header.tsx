@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { setIsHide, setIsLightbox, setIsDeleteBoard, setIsEditBoard, setIsAddTask } from 'app/features/boardSlice'
+import {
+   setIsHide,
+   setIsLightbox,
+   setIsDeleteBoard,
+   setIsEditBoard,
+   setIsAddTask,
+   setIsDeleteTask,
+} from 'app/features/boardSlice'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 
 const Header: React.FC = () => {
@@ -32,6 +39,17 @@ const Header: React.FC = () => {
    const handleAddNewTask = () => {
       dispatch(setIsAddTask(true))
       dispatch(setIsLightbox(true))
+   }
+
+   const handleShowEditTask = () => {
+      // dispatch(setIsLightbox(true))
+      // setIsModalOptions(false)
+   }
+
+   const handleShowDeleteTask = () => {
+      dispatch(setIsDeleteTask(true))
+      dispatch(setIsLightbox(true))
+      setIsModalOptions(false)
    }
 
    return (
@@ -77,12 +95,18 @@ const Header: React.FC = () => {
             </div>
          </section>
          {isModalOptions && (
-            <section className="fixed right-2 top-16 flex flex-col w-40 gap-1 pl-2 bg-white rounded">
+            <section className="fixed right-2 top-16 flex flex-col w-52 gap-1 pl-2 bg-white rounded">
                <button className="text-left p-1 w-3/4" onClick={handleShowEditBoard}>
                   Edit Board
                </button>
                <button className="text-left p-1 w-3/4" onClick={handleShowDeleteBoard}>
                   Delete Board
+               </button>
+               <button className="text-left p-1 w-3/4" onClick={handleShowEditTask}>
+                  Edit Task
+               </button>
+               <button className="text-left p-1 w-3/4" onClick={handleShowDeleteTask}>
+                  Delete Task
                </button>
             </section>
          )}

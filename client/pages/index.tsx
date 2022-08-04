@@ -10,6 +10,7 @@ import AddBoard from 'components/screenModals/AddBoard'
 import DeleteBoard from 'components/screenModals/DeleteBoard'
 import EditBoard from 'components/screenModals/EditBoard'
 import AddTask from 'components/screenModals/AddTask'
+import DeleteTask from 'components/screenModals/DeleteTask'
 
 const Home: NextPage = () => {
    const { isHide, isLightbox } = useAppSelector((state) => state.board)
@@ -33,6 +34,7 @@ const Home: NextPage = () => {
          <Board />
          <AddBoard />
          <DeleteBoard />
+         <DeleteTask />
          <EditBoard />
          <AddTask />
       </div>
