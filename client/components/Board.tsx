@@ -26,8 +26,20 @@ const Board = () => {
                      </div>
                      <div className="mt-3">
                         <div className="bg-white rounded p-2">
+                           <p className="font-bold">Build UI for onboarding flow</p>
+                           <p className="text-mediumGrey text-sm">0 of 3 subtask</p>
+                        </div>
+                     </div>
+                     <div className="mt-3">
+                        <div className="bg-white rounded p-2">
                            <p className="font-bold">Build UI for search</p>
-                           <p className="text-mediumGrey text-sm">0 of 3 subtasks</p>
+                           <p className="text-mediumGrey text-sm">0 of 1 subtask</p>
+                        </div>
+                     </div>
+                     <div className="mt-3">
+                        <div className="bg-white rounded p-2">
+                           <p className="font-bold">Build setting UI</p>
+                           <p className="text-mediumGrey text-sm">0 of 2 subtask</p>
                         </div>
                      </div>
                   </div>
