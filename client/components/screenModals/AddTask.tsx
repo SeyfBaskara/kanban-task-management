@@ -25,10 +25,12 @@ const AddTask: React.FC = () => {
 
    const handleCreateNewTask = () => {
       // Create Task
-      dispatch(createTask({ title: taskInput.title, description: taskInput.description, status: taskInput.status }))
-      dispatch(setIsAddTask(false))
-      dispatch(setIsLightbox(false))
-      setTaskInput({ title: '', description: '', status: '' })
+      if (taskInput.title !== '' && taskInput.description !== '' && taskInput.status !== '') {
+         dispatch(createTask({ title: taskInput.title, description: taskInput.description, status: taskInput.status }))
+         dispatch(setIsAddTask(false))
+         dispatch(setIsLightbox(false))
+         setTaskInput({ title: '', description: '', status: '' })
+      }
    }
    const handleTaskOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target

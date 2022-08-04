@@ -5,6 +5,7 @@ import {
    setIsLightbox,
    setIsDeleteBoard,
    setIsEditBoard,
+   setIsEditTask,
    setIsAddTask,
    setIsDeleteTask,
 } from 'app/features/boardSlice'
@@ -42,8 +43,9 @@ const Header: React.FC = () => {
    }
 
    const handleShowEditTask = () => {
-      // dispatch(setIsLightbox(true))
-      // setIsModalOptions(false)
+      dispatch(setIsEditTask(true))
+      dispatch(setIsLightbox(true))
+      setIsModalOptions(false)
    }
 
    const handleShowDeleteTask = () => {

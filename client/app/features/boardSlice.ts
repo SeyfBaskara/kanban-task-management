@@ -11,6 +11,7 @@ export interface IBoardState {
    isDeleteBoard: boolean
    isDeleteTask: boolean
    isEditBoard: boolean
+   isEditTask: boolean
    isSelected: number
    boards: IBoards[]
 }
@@ -23,6 +24,7 @@ const initialState: IBoardState = {
    isDeleteBoard: false,
    isDeleteTask: false,
    isEditBoard: false,
+   isEditTask: false,
    isSelected: 0,
    boards: [],
 }
@@ -90,6 +92,9 @@ export const boardSlice = createSlice({
       setIsEditBoard: (state, action: PayloadAction<boolean>) => {
          state.isEditBoard = action.payload
       },
+      setIsEditTask: (state, action: PayloadAction<boolean>) => {
+         state.isEditTask = action.payload
+      },
       setIsSelected: (state, action: PayloadAction<number>) => {
          state.isSelected = action.payload
       },
@@ -141,6 +146,7 @@ export const {
    setIsDeleteBoard,
    setIsDeleteTask,
    setIsEditBoard,
+   setIsEditTask,
    setIsSelected,
    addBoard,
 } = boardSlice.actions
