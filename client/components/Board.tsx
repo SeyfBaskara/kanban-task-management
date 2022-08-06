@@ -36,14 +36,6 @@ const Board = () => {
                                  </div>
                               )
                         )}
-                        {/* {column.name === 'done' && (
-                           <div className="mt-3">
-                              <div className="bg-white rounded p-2">
-                                 <p className="font-bold">Build UI for onboarding flow</p>
-                                 <p className="text-mediumGrey text-sm">0 of 3 subtask</p>
-                              </div>
-                           </div>
-                        )} */}
                      </div>
                   </div>
                ))}
