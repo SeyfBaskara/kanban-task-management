@@ -16,7 +16,7 @@ interface ITaskInputs {
 const AddTask: React.FC = () => {
    const [taskInput, setTaskInput] = useState<ITaskInputs>({ title: '', description: '', status: '' })
    const [inputFields, setInputFields] = useState<ISubtaskState[]>([{ name: '' }])
-   const { isAddTask, isSelected } = useAppSelector((state) => state.board)
+   const { isAddTask, isSelected, boards } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
 
    useEffect(() => {
@@ -26,7 +26,14 @@ const AddTask: React.FC = () => {
    const handleCreateNewTask = () => {
       // Create Task
       if (taskInput.title !== '' && taskInput.description !== '' && taskInput.status !== '') {
-         dispatch(createTask({ title: taskInput.title, description: taskInput.description, status: taskInput.status }))
+         dispatch(
+            createTask({
+               title: taskInput.title,
+               description: taskInput.description,
+               status: taskInput.status,
+               boardID: boards[isSelected].boardID,
+            })
+         )
          dispatch(setIsAddTask(false))
          dispatch(setIsLightbox(false))
          setTaskInput({ title: '', description: '', status: '' })

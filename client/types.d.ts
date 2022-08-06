@@ -16,4 +16,5 @@ interface ITasks {
    title: string
    description: string
    status: string
+   boardID: string
 }

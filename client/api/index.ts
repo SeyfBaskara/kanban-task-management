@@ -12,6 +12,7 @@ interface ITaskProps {
    title: string
    description: string
    status: string
+   boardID: string
 }
 
 // BOARDS
