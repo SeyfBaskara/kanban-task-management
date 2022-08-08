@@ -26,9 +26,9 @@ const Board = () => {
                            <h1 className="uppercase text-sm font-semibold text-mediumGrey">{column.name} (3)</h1>
                         </div>
                         {column.tasks?.map(
-                           (task) =>
+                           (task, index) =>
                               column.name === task.status && (
-                                 <div className="mt-3">
+                                 <div className="mt-3" key={index}>
                                     <div className="bg-white rounded p-2">
                                        <p className="font-bold">{task.title}</p>
                                        <p className="text-mediumGrey text-sm">{task.description}</p>

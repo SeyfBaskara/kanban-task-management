@@ -131,9 +131,11 @@ export const boardSlice = createSlice({
          )
       },
       [createTask.fulfilled.toString()]: (state, action: PayloadAction<ITasks>) => {
-         // const newtask = state.boards[state.isSelected].columns?.filter((column) =>
-         //    column.name === action.payload.status ? column.tasks?.push(action.payload) : column
-         // )
+         state.boards = state.boards.filter((board) =>
+            board.boardID === action.payload.boardID
+               ? board.columns?.filter((col) => (col.name === action.payload.status ? col.tasks?.push(action.payload) : col))
+               : board
+         )
       },
    },
 })
