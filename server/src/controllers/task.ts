@@ -4,14 +4,12 @@ import Task from '../models/Task'
 import Column from '../models/Column'
 
 export const createTask = async (req: Request, res: Response, next: NextFunction) => {
-   const { title, description, status } = req.body
+   const { title, description, status, boardID } = req.body
 
-   const column = await Column.findOne({ name: status })
-   const newTask = new Task({ title, description, status, boardID: column?.boardID })
-
+   const newTask = new Task({ title, description, status, boardID })
    try {
       await newTask.save()
-      await Column.findOneAndUpdate({ name: newTask.status }, { $push: { tasks: newTask } }, { new: true, runValidators: true })
+      await Column.findOneAndUpdate({ name: status, boardID }, { $push: { tasks: newTask } }, { new: true, runValidators: true })
       res.status(201).json(newTask)
    } catch (error) {
       next(error)
