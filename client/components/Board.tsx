@@ -5,11 +5,11 @@ const Board = () => {
    const { boards, isSelected } = useAppSelector((state) => state.board)
 
    return (
-      <article className="bg-lightGrey h-screen">
+      <article className="bg-lightGrey h-screen overflow-auto md:overflow-hidden">
          {boards[isSelected]?.columns?.length !== 0 ? (
-            <div className="flex h-full mt-16 overflow-x-auto gap-2">
+            <div className="flex h-full w-max mt-16 gap-2">
                {boards[isSelected]?.columns?.map((column) => (
-                  <div key={column.id} className="w-64 p-2">
+                  <div key={column.id} className="w-80 p-2 sm:w-64">
                      <div className="flex-col gap-3 items-center">
                         <div className="flex gap-3 items-center">
                            <div
