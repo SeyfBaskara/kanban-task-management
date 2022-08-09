@@ -15,6 +15,10 @@ const EditBoard: React.FC = () => {
 
    useEffect(() => {
       setName(boards[isSelected]?.name)
+      const newInput = [{ name: '' }]
+      boards[isSelected].columns?.map((col) => newInput.push({ name: col.name }))
+      newInput.shift()
+      setInputFields(newInput)
    }, [isSelected])
 
    const handleEditBoard = () => {
