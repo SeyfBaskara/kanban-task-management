@@ -23,6 +23,7 @@ export const updateBoard = (id: string, updateBoard: IProps) => axios.patch(`${u
 
 // COLUMNS
 export const createColumn = (newColumn: IProps) => axios.post(`${url}/create/column`, newColumn)
+export const deleteColumn = (id: string) => axios.delete(`${url}/delete/column/${id}`)
 
 //TASKS
 export const createTask = (newTask: ITaskProps) => axios.post(`${urlTask}/create`, newTask)
