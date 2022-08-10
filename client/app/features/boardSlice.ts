@@ -61,6 +61,10 @@ export const createColumn = createAsyncThunk('createColumn', async (newColumn: I
    const { data } = await API.createColumn(newColumn)
    return data
 })
+export const deleteColumn = createAsyncThunk('deleteColumn', async (id: string, thunkAPI) => {
+   const { data } = await API.deleteColumn(id)
+   return data
+})
 
 export const createTask = createAsyncThunk('createTask', async (newTask: ITasks, thunkAPI) => {
    const { data } = await API.createTask(newTask)
@@ -130,6 +134,10 @@ export const boardSlice = createSlice({
             board.boardID === action.payload.boardID ? board.columns?.push(action.payload) : board
          )
       },
+      [deleteColumn.fulfilled.toString()]: (state, action: PayloadAction<IColumns>) => {
+         // state implementation will come here
+      },
+
       [createTask.fulfilled.toString()]: (state, action: PayloadAction<ITasks>) => {
          state.boards = state.boards.filter((board) =>
             board.boardID === action.payload.boardID
