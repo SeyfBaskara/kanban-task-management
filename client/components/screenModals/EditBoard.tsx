@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsEditBoard, setIsLightbox, updateBoard } from 'app/features/boardSlice'
+import { setIsEditBoard, setIsLightbox, updateBoard, deleteColumn } from 'app/features/boardSlice'
 
 interface ICloumnState {
    name: string
@@ -10,6 +10,7 @@ interface ICloumnState {
 const EditBoard: React.FC = () => {
    const { isEditBoard, isSelected, boards } = useAppSelector((state) => state.board)
    const [name, setName] = useState<string>('')
+   const [columnID, setColumnID] = useState<string | undefined>('')
    const [inputFields, setInputFields] = useState<ICloumnState[]>([{ name: '' }])
    const dispatch = useAppDispatch()
 
@@ -27,11 +28,16 @@ const EditBoard: React.FC = () => {
          dispatch(setIsEditBoard(false))
          dispatch(setIsLightbox(false))
       }
+      if (columnID !== '') {
+         if (typeof columnID !== 'undefined') dispatch(deleteColumn(columnID))
+         setColumnID('')
+      }
    }
 
    const handleCloseEditBoardModal = () => {
       dispatch(setIsEditBoard(false))
       dispatch(setIsLightbox(false))
+      setColumnID('')
    }
 
    const handleEditColumn = (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,6 +48,8 @@ const EditBoard: React.FC = () => {
 
    const handleRemoveInputField = (index: number) => {
       let data = [...inputFields]
+      const columnID = boards[isSelected].columns?.filter((col) => col.name === data[index].name)[0]?.id
+      setColumnID(columnID)
       data.splice(index, 1)
       setInputFields(data)
    }
