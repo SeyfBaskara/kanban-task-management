@@ -17,7 +17,7 @@ const EditBoard: React.FC = () => {
    useEffect(() => {
       setName(boards[isSelected]?.name)
       const newInput = [{ name: '' }]
-      boards[isSelected].columns?.map((col) => newInput.push({ name: col.name }))
+      boards[isSelected]?.columns?.map((col) => newInput.push({ name: col.name }))
       newInput.shift()
       setInputFields(newInput)
    }, [isSelected])
@@ -29,7 +29,7 @@ const EditBoard: React.FC = () => {
          dispatch(setIsLightbox(false))
       }
       if (columnID !== '') {
-         if (typeof columnID !== 'undefined') dispatch(deleteColumn(columnID))
+         if (typeof columnID !== 'undefined') dispatch(deleteColumn({ id: columnID, boardID: boards[isSelected].boardID }))
          setColumnID('')
       }
    }

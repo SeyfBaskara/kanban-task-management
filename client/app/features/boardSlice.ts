@@ -39,6 +39,10 @@ interface IUpdatedBoardProps {
    id: string
    name: string
 }
+type IColumnProps = {
+   id: string
+   boardID: string
+}
 
 export const createBoard = createAsyncThunk('createBoard', async (newboard: IBoardProps, thunkAPI) => {
    const { data } = await API.createBoard(newboard)
@@ -61,8 +65,8 @@ export const createColumn = createAsyncThunk('createColumn', async (newColumn: I
    const { data } = await API.createColumn(newColumn)
    return data
 })
-export const deleteColumn = createAsyncThunk('deleteColumn', async (id: string, thunkAPI) => {
-   const { data } = await API.deleteColumn(id)
+export const deleteColumn = createAsyncThunk('deleteColumn', async (column: IColumnProps, thunkAPI) => {
+   const { data } = await API.deleteColumn(column.id)
    return data
 })
 
@@ -135,7 +139,10 @@ export const boardSlice = createSlice({
          )
       },
       [deleteColumn.fulfilled.toString()]: (state, action: PayloadAction<IColumns>) => {
-         // state implementation will come here
+         //FIXME doesnt uptade state correctly
+         state.boards = state.boards.filter(
+            (board) => board.boardID === action.payload.boardID && board.columns?.filter((col) => col.id !== action.payload.id)
+         )
       },
 
       [createTask.fulfilled.toString()]: (state, action: PayloadAction<ITasks>) => {
