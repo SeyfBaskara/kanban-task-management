@@ -23,7 +23,7 @@ const EditBoard: React.FC = () => {
    }, [isSelected])
 
    const handleEditBoard = () => {
-      if (name !== '') {
+      if (name !== '' && boards[isSelected]?.name !== name) {
          dispatch(updateBoard({ name, id: boards[isSelected].id }))
          dispatch(setIsEditBoard(false))
          dispatch(setIsLightbox(false))
@@ -31,6 +31,8 @@ const EditBoard: React.FC = () => {
       if (columnID !== '') {
          if (typeof columnID !== 'undefined') dispatch(deleteColumn({ id: columnID, boardID: boards[isSelected].boardID }))
          setColumnID('')
+         dispatch(setIsEditBoard(false))
+         dispatch(setIsLightbox(false))
       }
    }
 
