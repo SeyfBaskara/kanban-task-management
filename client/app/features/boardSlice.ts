@@ -134,15 +134,16 @@ export const boardSlice = createSlice({
          )
       },
       [createColumn.fulfilled.toString()]: (state, action: PayloadAction<IColumns>) => {
-         state.boards = state.boards.filter((board) =>
+         const colum = state.boards.filter((board) =>
             board.boardID === action.payload.boardID ? board.columns?.push(action.payload) : board
          )
       },
       [deleteColumn.fulfilled.toString()]: (state, action: PayloadAction<IColumns>) => {
-         //FIXME doesnt uptade state correctly
-         state.boards = state.boards.filter(
-            (board) => board.boardID === action.payload.boardID && board.columns?.filter((col) => col.id !== action.payload.id)
-         )
+         const board = state.boards.filter((board) => board.boardID === action.payload.boardID)[0]
+         const columns = board.columns?.filter((col) => col.id !== action.payload.id)
+         board.columns = columns
+
+         state.boards = [...state.boards]
       },
 
       [createTask.fulfilled.toString()]: (state, action: PayloadAction<ITasks>) => {
