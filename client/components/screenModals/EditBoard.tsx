@@ -14,6 +14,8 @@ const EditBoard: React.FC = () => {
    const [inputFields, setInputFields] = useState<ICloumnState[]>([{ name: '' }])
    const dispatch = useAppDispatch()
 
+   // console.log(inputFields)
+
    useEffect(() => {
       setName(boards[isSelected]?.name)
       const newInput = [{ name: '' }]
@@ -28,7 +30,7 @@ const EditBoard: React.FC = () => {
          dispatch(setIsEditBoard(false))
          dispatch(setIsLightbox(false))
       }
-      if (columnID !== '') {
+      if (columnID !== '' && columnID !== undefined) {
          if (typeof columnID !== 'undefined') dispatch(deleteColumn({ id: columnID, boardID: boards[isSelected].boardID }))
          setColumnID('')
          dispatch(setIsEditBoard(false))
@@ -40,6 +42,8 @@ const EditBoard: React.FC = () => {
       dispatch(setIsEditBoard(false))
       dispatch(setIsLightbox(false))
       setColumnID('')
+      const removeEmptyInput = inputFields.filter((input) => input.name !== '')
+      setInputFields(removeEmptyInput)
    }
 
    const handleEditColumn = (e: React.FormEvent<HTMLFormElement>) => {
@@ -99,6 +103,7 @@ const EditBoard: React.FC = () => {
                            value={input.name}
                            autoComplete="off"
                            name="name"
+                           required
                            onChange={(e) => handleInputChange(index, e)}
                         />
                         <div className="relative w-4 h-4" onClick={() => handleRemoveInputField(index)}>
