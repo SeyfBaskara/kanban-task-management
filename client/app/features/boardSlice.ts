@@ -7,6 +7,7 @@ export interface IBoardState {
    isHide: boolean
    isLightbox: boolean
    isAddBoard: boolean
+   isAddColumn: boolean
    isAddTask: boolean
    isDeleteBoard: boolean
    isDeleteTask: boolean
@@ -20,6 +21,7 @@ const initialState: IBoardState = {
    isHide: false,
    isLightbox: false,
    isAddBoard: false,
+   isAddColumn: false,
    isAddTask: false,
    isDeleteBoard: false,
    isDeleteTask: false,
@@ -87,6 +89,9 @@ export const boardSlice = createSlice({
       },
       setIsAddBoard: (state, action: PayloadAction<boolean>) => {
          state.isAddBoard = action.payload
+      },
+      setIsAddColumn: (state, action: PayloadAction<boolean>) => {
+         state.isAddColumn = action.payload
       },
       setIsAddTask: (state, action: PayloadAction<boolean>) => {
          state.isAddTask = action.payload
@@ -160,6 +165,7 @@ export const {
    setIsHide,
    setIsLightbox,
    setIsAddBoard,
+   setIsAddColumn,
    setIsAddTask,
    setIsDeleteBoard,
    setIsDeleteTask,
