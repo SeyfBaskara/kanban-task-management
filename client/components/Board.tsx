@@ -1,8 +1,15 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { setIsAddColumn, setIsLightbox } from 'app/features/boardSlice'
 
 const Board = () => {
    const { boards, isSelected } = useAppSelector((state) => state.board)
+   const dispatch = useAppDispatch()
+
+   const handleShowAddNewColumn = () => {
+      dispatch(setIsAddColumn(true))
+      dispatch(setIsLightbox(true))
+   }
 
    return (
       <article className="bg-lightGrey h-screen overflow-auto md:overflow-hidden">
@@ -44,7 +51,9 @@ const Board = () => {
             <div className="flex h-full">
                <div className="m-auto text-center">
                   <p className="px-10 font-semibold text-mediumGrey">This board is empty. Create a new column to get started.</p>
-                  <button className="rounded-full bg-purple py-2 px-3 mt-2 text-white text-xs">+Add New Colum</button>
+                  <button className="rounded-full bg-purple py-2 px-3 mt-2 text-white text-xs" onClick={handleShowAddNewColumn}>
+                     +Add New Colum
+                  </button>
                </div>
             </div>
          )}
