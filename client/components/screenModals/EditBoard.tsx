@@ -13,7 +13,7 @@ const EditBoard: React.FC = () => {
    const [columnID, setColumnID] = useState<string | undefined>('')
    const [inputFields, setInputFields] = useState<ICloumnState[]>([{ name: '' }])
    const dispatch = useAppDispatch()
-   const columnLength = boards[isSelected].columns?.length
+   const columnLength = boards[isSelected]?.columns?.length
 
    useEffect(() => {
       setName(boards[isSelected]?.name)

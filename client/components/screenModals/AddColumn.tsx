@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsLightbox, setIsAddColumn } from 'app/features/boardSlice'
+import { setIsLightbox, setIsAddColumn, createColumn } from 'app/features/boardSlice'
 
 interface ICloumnState {
    name: string
@@ -9,11 +9,25 @@ interface ICloumnState {
 
 const AddColumn: React.FC = () => {
    const [inputFields, setInputFields] = useState<ICloumnState[]>([{ name: '' }])
-   const { isAddColumn } = useAppSelector((state) => state.board)
+   const { isAddColumn, boards, isSelected } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
+   const boardID = boards[isSelected]?.boardID
+
+   useEffect(() => {
+      setInputFields([{ name: '' }])
+   }, [isAddColumn])
 
    const handleCreateNewColumn = () => {
-      console.log('create column')
+      if (inputFields.length !== 0 && inputFields[0].name !== '') {
+         inputFields.map((input) => {
+            if (input.name !== '') {
+               dispatch(createColumn({ name: input.name, boardID, id: '' }))
+            }
+         })
+
+         dispatch(setIsAddColumn(false))
+         dispatch(setIsLightbox(false))
+      }
    }
 
    const handleCloseAddColumnModal = () => {
