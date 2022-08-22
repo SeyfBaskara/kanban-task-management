@@ -13,6 +13,7 @@ const EditBoard: React.FC = () => {
    const [columnID, setColumnID] = useState<string | undefined>('')
    const [inputFields, setInputFields] = useState<ICloumnState[]>([{ name: '' }])
    const dispatch = useAppDispatch()
+   const columnLength = boards[isSelected].columns?.length
 
    useEffect(() => {
       setName(boards[isSelected]?.name)
@@ -22,7 +23,22 @@ const EditBoard: React.FC = () => {
       setInputFields(newInput)
    }, [isSelected])
 
+   const newAddedColumns = () => {
+      const columnNames = boards[isSelected]?.columns?.map((col) => col.name)
+      const newColumns: string[] = []
+
+      for (let input of inputFields) {
+         if (!columnNames?.includes(input.name) && input.name !== '') {
+            newColumns.push(input.name)
+         }
+      }
+
+      return newColumns
+   }
+
    const handleEditBoard = () => {
+      const newcolumn = newAddedColumns()
+
       if (name !== '' && boards[isSelected]?.name !== name) {
          dispatch(updateBoard({ name, id: boards[isSelected].id }))
          dispatch(setIsEditBoard(false))
@@ -34,14 +50,23 @@ const EditBoard: React.FC = () => {
          dispatch(setIsEditBoard(false))
          dispatch(setIsLightbox(false))
       }
+
+      if (columnLength !== inputFields.length && newcolumn.length !== 0) {
+         // dispatch addnew column will come here
+         console.log(newcolumn)
+      }
    }
 
    const handleCloseEditBoardModal = () => {
       dispatch(setIsEditBoard(false))
       dispatch(setIsLightbox(false))
       setColumnID('')
-      if (boards[isSelected].columns?.length !== inputFields.length) {
-         setInputFields(inputFields.slice(0, -1))
+      if (columnLength !== inputFields.length) {
+         let removeInput = 1
+         if (columnLength !== undefined) {
+            removeInput = inputFields.length - columnLength
+         }
+         setInputFields(inputFields.slice(0, -removeInput))
       }
    }
 
