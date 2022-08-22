@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
-import { setIsEditBoard, setIsLightbox, updateBoard, deleteColumn } from 'app/features/boardSlice'
+import { setIsEditBoard, setIsLightbox, updateBoard, deleteColumn, createColumn } from 'app/features/boardSlice'
 
 interface ICloumnState {
    name: string
@@ -38,6 +38,7 @@ const EditBoard: React.FC = () => {
 
    const handleEditBoard = () => {
       const newcolumn = newAddedColumns()
+      const boardID = boards[isSelected].boardID
 
       if (name !== '' && boards[isSelected]?.name !== name) {
          dispatch(updateBoard({ name, id: boards[isSelected].id }))
@@ -52,8 +53,9 @@ const EditBoard: React.FC = () => {
       }
 
       if (columnLength !== inputFields.length && newcolumn.length !== 0) {
-         // dispatch addnew column will come here
-         console.log(newcolumn)
+         newcolumn.forEach((name) => dispatch(createColumn({ name, boardID, id: '' })))
+         dispatch(setIsEditBoard(false))
+         dispatch(setIsLightbox(false))
       }
    }
 
