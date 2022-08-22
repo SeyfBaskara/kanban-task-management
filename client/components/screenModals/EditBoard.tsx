@@ -14,8 +14,6 @@ const EditBoard: React.FC = () => {
    const [inputFields, setInputFields] = useState<ICloumnState[]>([{ name: '' }])
    const dispatch = useAppDispatch()
 
-   // console.log(inputFields)
-
    useEffect(() => {
       setName(boards[isSelected]?.name)
       const newInput = [{ name: '' }]
@@ -42,8 +40,9 @@ const EditBoard: React.FC = () => {
       dispatch(setIsEditBoard(false))
       dispatch(setIsLightbox(false))
       setColumnID('')
-      const removeEmptyInput = inputFields.filter((input) => input.name !== '')
-      setInputFields(removeEmptyInput)
+      if (boards[isSelected].columns?.length !== inputFields.length) {
+         setInputFields(inputFields.slice(0, -1))
+      }
    }
 
    const handleEditColumn = (e: React.FormEvent<HTMLFormElement>) => {
