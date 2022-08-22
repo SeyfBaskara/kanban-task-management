@@ -46,7 +46,7 @@ const EditBoard: React.FC = () => {
          dispatch(setIsLightbox(false))
       }
       if (columnID !== '' && columnID !== undefined) {
-         if (typeof columnID !== 'undefined') dispatch(deleteColumn({ id: columnID, boardID: boards[isSelected].boardID }))
+         if (typeof columnID !== 'undefined') dispatch(deleteColumn({ id: columnID, boardID }))
          setColumnID('')
          dispatch(setIsEditBoard(false))
          dispatch(setIsLightbox(false))

@@ -87,7 +87,7 @@ const AddBoard: React.FC = () => {
          </div>
          <div>
             <form className="flex flex-col gap-2" onSubmit={handleAddNewColumn} autoComplete="off">
-               <label className="text-sm text-mediumGrey">Board Cloumns</label>
+               <label className="text-sm text-mediumGrey">Board Columns</label>
                {inputFields.map((input, index) => {
                   return (
                      <div className="flex gap-3 items-center " key={index}>
