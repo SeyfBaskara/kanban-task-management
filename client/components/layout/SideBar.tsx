@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { useTheme } from 'next-themes'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
 import { setIsAddBoard, setIsHide, setIsLightbox, setIsSelected } from 'app/features/boardSlice'
 
 const SideBar: React.FC = () => {
    const { isHide, boards, isSelected } = useAppSelector((state) => state.board)
    const [isSidebar, setIsSidebar] = useState<boolean>(false)
+   const [isDark, setIsDark] = useState(false)
    const dispatch = useAppDispatch()
+
+   const { setTheme } = useTheme()
 
    const handleHideSidebar = () => {
       setIsSidebar(true)
@@ -26,6 +30,15 @@ const SideBar: React.FC = () => {
       dispatch(setIsSelected(index))
       dispatch(setIsHide(false))
       dispatch(setIsLightbox(false))
+   }
+
+   const handleDarkMode = () => {
+      setIsDark(true)
+      setTheme('dark')
+   }
+   const handleLightMode = () => {
+      setIsDark(false)
+      setTheme('light')
    }
 
    return (
@@ -67,13 +80,13 @@ const SideBar: React.FC = () => {
                </section>
                <section>
                   <div className="flex items-center justify-center gap-4 rounded bg-lightGrey p-3 mx-3">
-                     <div className="relative w-5 h-5">
+                     <div className="relative w-5 h-5 cursor-pointer" onClick={handleLightMode}>
                         <Image src="/assets/icon-light-theme.svg" alt="light icon" layout="fill" />
                      </div>
-                     <div className="w-10 h-5 r p-1 rounded-full bg-purple">
-                        <div className="w-3 h-3 rounded-full bg-white"></div>
+                     <div className="w-10 h-5 r p-1 rounded-full bg-purple relative">
+                        <div className={`absolute ${isDark ? 'right-1' : 'left-1'} w-3 h-3 rounded-full bg-white`}></div>
                      </div>
-                     <div className="relative w-4 h-4">
+                     <div className="relative w-4 h-4 cursor-pointer" onClick={handleDarkMode}>
                         <Image src="/assets/icon-dark-theme.svg" alt="dark theme icon" layout="fill" />
                      </div>
                   </div>
