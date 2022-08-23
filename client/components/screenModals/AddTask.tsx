@@ -72,7 +72,7 @@ const AddTask: React.FC = () => {
       <section
          className={`${
             isAddTask
-               ? 'fixed flex flex-col gap-5 top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2 bg-white w-5/6 p-4 rounded sm:w-96 z-50'
+               ? 'fixed flex flex-col gap-5 top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-darkGrey w-5/6 p-4 rounded sm:w-96 z-50'
                : 'hidden'
          }`}
       >
@@ -82,9 +82,9 @@ const AddTask: React.FC = () => {
                <Image src="/assets/icon-cross.svg" alt="cross close icon" width={15} height={15} />
             </div>
             <form className="flex flex-col ">
-               <label className="text-sm text-mediumGrey mb-1.5">Title</label>
+               <label className="text-sm text-mediumGrey dark:text-white mb-1.5">Title</label>
                <input
-                  className="border-2 p-1 text-sm rounded"
+                  className="border-2 dark:border-linesDark  dark:bg-darkGrey p-1 text-sm rounded"
                   type="text"
                   name="title"
                   placeholder="e.g Take coffe break"
@@ -92,9 +92,9 @@ const AddTask: React.FC = () => {
                   onChange={handleTaskOnChange}
                   required
                />
-               <label className="text-sm text-mediumGrey mb-1.5 mt-6">Description</label>
+               <label className="text-sm text-mediumGrey dark:text-white mb-1.5 mt-6">Description</label>
                <textarea
-                  className="border-2 p-1 text-sm rounded h-36"
+                  className="border-2 p-1 text-sm rounded h-36 dark:border-linesDark dark:bg-darkGrey"
                   placeholder="e.g. It’s always good to take a break. This 
                   15 minute break will  recharge the batteries 
                   a little."
@@ -107,13 +107,13 @@ const AddTask: React.FC = () => {
          </div>
          <div>
             <form className="flex flex-col gap-2" onSubmit={handleAddNewSubtask} autoComplete="off">
-               <label className="text-sm text-mediumGrey">Subtasks</label>
+               <label className="text-sm text-mediumGrey dark:text-white">Subtasks</label>
                {inputFields.map((input, index) => {
                   return (
                      <div className="flex gap-3 items-center " key={index}>
                         <input
                            type="text"
-                           className="border-2 w-full p-1 rounded"
+                           className="border-2 w-full p-1 rounded dark:border-linesDark dark:bg-darkGrey"
                            value={input.name}
                            autoComplete="off"
                            name="name"
@@ -133,9 +133,9 @@ const AddTask: React.FC = () => {
          </div>
          <div>
             <form className="flex flex-col gap-1 ">
-               <label className="text-sm text-mediumGrey mb-1.5">Status</label>
+               <label className="text-sm text-mediumGrey dark:text-white mb-1.5">Status</label>
                <input
-                  className="border-2 p-1 text-sm rounded"
+                  className="border-2 p-1 text-sm rounded dark:border-linesDark dark:bg-darkGrey"
                   type="text"
                   name="status"
                   placeholder="Todo"

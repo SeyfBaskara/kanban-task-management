@@ -38,8 +38,10 @@ const Header: React.FC = () => {
    }
 
    const handleAddNewTask = () => {
-      dispatch(setIsAddTask(true))
-      dispatch(setIsLightbox(true))
+      if (boards[isSelected]?.columns?.length !== 0) {
+         dispatch(setIsAddTask(true))
+         dispatch(setIsLightbox(true))
+      }
    }
 
    const handleShowEditTask = () => {
