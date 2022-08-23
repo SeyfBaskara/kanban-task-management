@@ -22,7 +22,7 @@ const DeleteBoard: React.FC = () => {
       <section
          className={`${
             isDeleteBoard
-               ? 'fixed flex flex-col gap-5 top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2 bg-white w-5/6 p-4 rounded sm:w-96 z-50'
+               ? 'fixed flex flex-col gap-5 top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-darkGrey w-5/6 p-4 rounded sm:w-96 z-50'
                : 'hidden'
          }`}
       >
@@ -42,7 +42,7 @@ const DeleteBoard: React.FC = () => {
             </button>
             <button
                onClick={handleCancelDeleteBoard}
-               className="p-1.5 text-purple bg-linesLight rounded-full w-full font-semibold hover:bg-purpleHover hover:text-white"
+               className="p-1.5 text-purple bg-linesLight dark:bg-white rounded-full w-full font-semibold hover:bg-purpleHover hover:text-white"
             >
                Cancel
             </button>
