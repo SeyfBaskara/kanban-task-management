@@ -104,7 +104,7 @@ const Header: React.FC = () => {
             </div>
          </section>
          {isModalOptions && (
-            <section className="fixed right-2 top-16 flex flex-col w-52 gap-1 pl-2 bg-white rounded">
+            <section className="fixed right-2 top-16 flex flex-col w-52 gap-1 pl-2 bg-white dark:bg-darkGrey rounded">
                <button className="text-left p-1 w-3/4" onClick={handleShowEditBoard}>
                   Edit Board
                </button>

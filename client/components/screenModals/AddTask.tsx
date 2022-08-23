@@ -126,7 +126,7 @@ const AddTask: React.FC = () => {
                      </div>
                   )
                })}
-               <button type="submit" className="p-1.5 text-purple bg-linesLight rounded-full mt-1">
+               <button type="submit" className="p-1.5 text-purple bg-linesLight dark:bg-white rounded-full mt-1">
                   +Add New Subtask
                </button>
             </form>

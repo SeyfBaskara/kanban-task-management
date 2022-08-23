@@ -64,7 +64,7 @@ const AddBoard: React.FC = () => {
       <section
          className={`${
             isAddBoard
-               ? 'fixed flex flex-col gap-5 top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2 bg-white w-5/6 p-4 rounded sm:w-96 z-50'
+               ? 'fixed flex flex-col gap-5 top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-darkGrey w-5/6 p-4 rounded sm:w-96 z-50'
                : 'hidden'
          }`}
       >
@@ -74,9 +74,9 @@ const AddBoard: React.FC = () => {
                <Image src="/assets/icon-cross.svg" alt="cross close icon" width={15} height={15} />
             </div>
             <form className="flex flex-col ">
-               <label className="text-sm text-mediumGrey mb-1.5">Board Name</label>
+               <label className="text-sm text-mediumGrey dark:text-white mb-1.5">Board Name</label>
                <input
-                  className="border-2 p-1 text-sm rounded"
+                  className="border-2 p-1 text-sm rounded dark:border-linesDark dark:bg-darkGrey"
                   type="text"
                   placeholder="e.g Web design"
                   value={name}
@@ -87,13 +87,13 @@ const AddBoard: React.FC = () => {
          </div>
          <div>
             <form className="flex flex-col gap-2" onSubmit={handleAddNewColumn} autoComplete="off">
-               <label className="text-sm text-mediumGrey">Board Columns</label>
+               <label className="text-sm text-mediumGrey dark:text-white">Board Columns</label>
                {inputFields.map((input, index) => {
                   return (
                      <div className="flex gap-3 items-center " key={index}>
                         <input
                            type="text"
-                           className="border-2 w-full p-1 rounded"
+                           className="border-2 w-full p-1 rounded dark:border-linesDark dark:bg-darkGrey"
                            value={input.name}
                            autoComplete="off"
                            name="name"
@@ -106,7 +106,7 @@ const AddBoard: React.FC = () => {
                      </div>
                   )
                })}
-               <button type="submit" className="p-1.5 text-purple bg-linesLight rounded-full mt-1">
+               <button type="submit" className="p-1.5 text-purple bg-linesLight dark:bg-white rounded-full mt-1">
                   +Add New Column
                </button>
             </form>
