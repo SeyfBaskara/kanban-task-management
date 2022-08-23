@@ -55,7 +55,7 @@ const Header: React.FC = () => {
    }
 
    return (
-      <header className="w-screen flex items-center fixed bg-white ">
+      <header className="w-screen flex items-center fixed bg-white dark:bg-darkGrey">
          <section className="hidden sm:flex w-48 shrink-0 p-3 md:w-60">
             <div>
                <Image src="/assets/logo-dark.svg" alt="logo" width={143} height={23} />
@@ -78,7 +78,12 @@ const Header: React.FC = () => {
                </div>
             </div>
             <div className="flex gap-2 items-center sm:gap-4 md:mr-3">
-               <div className={`bg-purple w-12 rounded-full text-center p-1 ${boards.length === 0 && 'opacity-40'} sm:hidden`}>
+               <div
+                  className={`bg-purple w-12 rounded-full text-center p-1 ${
+                     boards[isSelected]?.columns?.length === 0 && 'opacity-40'
+                  } sm:hidden`}
+                  onClick={handleAddNewTask}
+               >
                   <Image src="/assets/icon-add-task-mobile.svg" alt="add icon" width={12} height={12} />
                </div>
                <div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { useAppSelector, useAppDispatch } from 'app/hooks'
@@ -10,7 +10,15 @@ const SideBar: React.FC = () => {
    const [isDark, setIsDark] = useState(false)
    const dispatch = useAppDispatch()
 
-   const { setTheme } = useTheme()
+   const { systemTheme, theme, setTheme } = useTheme()
+
+   useEffect(() => {
+      const currentTheme = theme === 'system' ? systemTheme : theme
+
+      if (currentTheme === 'dark') {
+         setIsDark(true)
+      }
+   }, [])
 
    const handleHideSidebar = () => {
       setIsSidebar(true)

@@ -12,7 +12,7 @@ const Board = () => {
    }
 
    return (
-      <article className="bg-lightGrey h-screen overflow-auto md:overflow-hidden">
+      <article className="bg-lightGrey h-screen overflow-auto dark:bg-veryDarkGrey md:overflow-hidden ">
          {boards[isSelected]?.columns?.length !== 0 ? (
             <div className="flex h-full w-max mt-16 gap-2">
                {boards[isSelected]?.columns?.map((column) => (
@@ -36,7 +36,7 @@ const Board = () => {
                            (task, index) =>
                               column.name === task.status && (
                                  <div className="mt-3" key={index}>
-                                    <div className="bg-white rounded p-2">
+                                    <div className="bg-white dark:bg-darkGrey rounded p-4">
                                        <p className="font-bold">{task.title}</p>
                                        <p className="text-mediumGrey text-sm">{task.description}</p>
                                     </div>
