@@ -57,38 +57,38 @@ const AddColumn: React.FC = () => {
       <section
          className={`${
             isAddColumn
-               ? 'fixed flex flex-col gap-5 top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2 bg-white w-5/6 p-4 rounded sm:w-96 z-50'
+               ? 'fixed flex flex-col gap-5 top-1/2 left-1/2 tranform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-darkGrey w-5/6 p-4 rounded sm:w-96 z-50'
                : 'hidden'
          }`}
       >
          <div className="flex flex-col gap-3">
             <h1 className="font-bold text-xl">Add New Column</h1>
-            <div className="fixed right-2 top-1" onClick={handleCloseAddColumnModal}>
+            <div className="fixed right-2 top-1 cursor-pointer" onClick={handleCloseAddColumnModal}>
                <Image src="/assets/icon-cross.svg" alt="cross close icon" width={15} height={15} />
             </div>
          </div>
          <div>
             <form className="flex flex-col gap-2" onSubmit={handleAddNewColumn} autoComplete="off">
-               <label className="text-sm text-mediumGrey">Board Column</label>
+               <label className="text-sm text-mediumGrey dark:text-white">Board Column</label>
                {inputFields.map((input, index) => {
                   return (
                      <div className="flex gap-3 items-center " key={index}>
                         <input
                            type="text"
-                           className="border-2 w-full p-1 rounded"
+                           className="border-2 w-full p-2 rounded dark:border-linesDark dark:bg-darkGrey"
                            value={input.name}
                            autoComplete="off"
                            name="name"
                            required
                            onChange={(e) => handleInputChange(index, e)}
                         />
-                        <div className="relative w-4 h-4" onClick={() => handleRemoveInputField(index)}>
+                        <div className="relative w-4 h-4 cursor-pointer" onClick={() => handleRemoveInputField(index)}>
                            <Image src="/assets/icon-cross.svg" alt="cross delete icon" layout="fill" />
                         </div>
                      </div>
                   )
                })}
-               <button type="submit" className="p-1.5 text-purple bg-linesLight rounded-full mt-1">
+               <button type="submit" className="p-1.5 text-purple bg-linesLight dark:bg-white rounded-full mt-1">
                   +Add New Column
                </button>
             </form>

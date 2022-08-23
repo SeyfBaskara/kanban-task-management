@@ -55,7 +55,7 @@ const SideBar: React.FC = () => {
             <section
                className={`${
                   isHide
-                     ? 'flex gap-5 absolute left-1/2 transform -translate-x-1/2 translate-y-5 h-auto w-56 pb-4 bg-white rounded '
+                     ? 'flex gap-5 absolute left-1/2 transform -translate-x-1/2 translate-y-5 h-auto w-56 pb-4 bg-white dark:bg-darkGrey rounded '
                      : 'hidden'
                } sm:flex flex-col justify-between h-full w-48 shrink-0 md:w-60 z-50`}
             >
@@ -87,7 +87,7 @@ const SideBar: React.FC = () => {
                   </button>
                </section>
                <section>
-                  <div className="flex items-center justify-center gap-4 rounded bg-lightGrey p-3 mx-3">
+                  <div className="flex items-center justify-center gap-4 rounded bg-lightGrey dark:bg-veryDarkGrey p-3 mx-3">
                      <div className="relative w-5 h-5 cursor-pointer" onClick={handleLightMode}>
                         <Image src="/assets/icon-light-theme.svg" alt="light icon" layout="fill" />
                      </div>

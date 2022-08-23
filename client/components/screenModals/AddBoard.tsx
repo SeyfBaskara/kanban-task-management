@@ -70,7 +70,7 @@ const AddBoard: React.FC = () => {
       >
          <div className="flex flex-col gap-3">
             <h1 className="font-bold text-xl">Add New Board</h1>
-            <div className="fixed right-2 top-1" onClick={handleCloseAddBoardModal}>
+            <div className="fixed right-2 top-1 cursor-pointer" onClick={handleCloseAddBoardModal}>
                <Image src="/assets/icon-cross.svg" alt="cross close icon" width={15} height={15} />
             </div>
             <form className="flex flex-col ">

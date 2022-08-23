@@ -62,7 +62,7 @@ const EditTask: React.FC = () => {
       >
          <div className="flex flex-col gap-3">
             <h1 className="font-bold text-xl">Edit Task</h1>
-            <div className="fixed right-2 top-1" onClick={handleCloseAddTaskModal}>
+            <div className="fixed right-2 top-1 cursor-pointer" onClick={handleCloseAddTaskModal}>
                <Image src="/assets/icon-cross.svg" alt="cross close icon" width={15} height={15} />
             </div>
             <form className="flex flex-col ">

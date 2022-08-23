@@ -102,7 +102,7 @@ const EditBoard: React.FC = () => {
       >
          <div className="flex flex-col gap-3">
             <h1 className="font-bold text-xl">Edit Board</h1>
-            <div className="fixed right-2 top-1" onClick={handleCloseEditBoardModal}>
+            <div className="fixed right-2 top-1 cursor-pointer" onClick={handleCloseEditBoardModal}>
                <Image src="/assets/icon-cross.svg" alt="cross close icon" width={15} height={15} />
             </div>
             <form className="flex flex-col ">
