@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { useTheme } from 'next-themes'
 import {
    setIsHide,
    setIsLightbox,
@@ -15,6 +16,8 @@ const Header: React.FC = () => {
    const [isModalOptions, setIsModalOptions] = useState<boolean>(false)
    const { isHide, isLightbox, boards, isSelected } = useAppSelector((state) => state.board)
    const dispatch = useAppDispatch()
+   const { systemTheme, theme, setTheme } = useTheme()
+   const currentTheme = theme === 'system' ? systemTheme : theme
 
    const handleSidebar = () => {
       dispatch(setIsHide(!isHide))
@@ -59,11 +62,17 @@ const Header: React.FC = () => {
    return (
       <header className="w-screen flex items-center fixed bg-white dark:bg-darkGrey">
          <section className="hidden sm:flex w-48 shrink-0 p-3 md:w-60">
-            <div>
-               <Image src="/assets/logo-dark.svg" alt="logo" width={143} height={23} />
-            </div>
+            {currentTheme === 'dark' ? (
+               <div>
+                  <Image src="/assets/logo-light.svg" alt="logo" width={143} height={23} />
+               </div>
+            ) : (
+               <div>
+                  <Image src="/assets/logo-dark.svg" alt="logo" width={143} height={23} />
+               </div>
+            )}
          </section>
-         <section className="flex w-screen justify-between items-center p-3 border-l-2 border-lightGrey">
+         <section className="flex w-screen justify-between items-center p-3 border-l-2 border-lightGrey dark:border-linesDark ">
             <div className="flex gap-3 items-center">
                <div className="sm:hidden">
                   <Image src="/assets/logo-mobile.svg" alt="logo" width={24} height={25} />
