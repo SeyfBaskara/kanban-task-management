@@ -6,7 +6,7 @@ const Layout = ({ children }: any): JSX.Element => {
    return (
       <>
          <Header />
-         <main className="flex ">
+         <main className="flex dark:bg-darkGrey">
             <SideBar />
             {children}
          </main>
