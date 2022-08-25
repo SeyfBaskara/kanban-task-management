@@ -91,7 +91,7 @@ const Header: React.FC = () => {
                <div>
                   <button
                      className={`hidden rounded-full bg-purple py-2 px-3 text-white text-xs ${
-                        boards.length === 0 && 'opacity-40'
+                        boards[isSelected]?.columns?.length === 0 && 'opacity-40'
                      } sm:block`}
                      onClick={handleAddNewTask}
                   >

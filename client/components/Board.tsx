@@ -30,7 +30,9 @@ const Board = () => {
                                     : 'bg-red'
                               } rounded-full w-3 h-3`}
                            ></div>
-                           <h1 className="uppercase text-sm font-semibold text-mediumGrey">{column.name} (3)</h1>
+                           <h1 className="uppercase text-sm font-semibold text-mediumGrey">
+                              {column.name} ({column.tasks?.length})
+                           </h1>
                         </div>
                         {column.tasks?.map(
                            (task, index) =>
