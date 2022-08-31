@@ -16,7 +16,7 @@ import AddColumn from 'components/screenModals/AddColumn'
 
 const Home: NextPage = () => {
    const { isHide, isLightbox } = useAppSelector((state) => state.board)
-
+   console.log('test')
    return (
       <div className="w-full">
          <Head>
@@ -49,7 +49,6 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
    const response = await fetch('http://localhost:5000/api/board')
 
    const data = await response.json()
-
    store.dispatch(addBoard(data))
 })
 
