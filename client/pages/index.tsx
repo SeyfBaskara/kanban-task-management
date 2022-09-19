@@ -16,7 +16,7 @@ import AddColumn from 'components/screenModals/AddColumn'
 
 const Home: NextPage = () => {
    const { isHide, isLightbox } = useAppSelector((state) => state.board)
-   console.log('test')
+
    return (
       <div className="w-full">
          <Head>
@@ -45,11 +45,13 @@ const Home: NextPage = () => {
    )
 }
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps((store) => async (): Promise<any> => {
-   const response = await fetch('http://localhost:5000/api/board')
+export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
+   (store) => async (): Promise<any> => {
+      const response = await fetch('https://kanban-task-managment.herokuapp.com/api/board')
 
-   const data = await response.json()
-   store.dispatch(addBoard(data))
-})
+      const data = await response.json()
+      store.dispatch(addBoard(data))
+   }
+)
 
 export default Home
