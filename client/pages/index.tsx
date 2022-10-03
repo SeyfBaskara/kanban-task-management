@@ -45,13 +45,11 @@ const Home: NextPage = () => {
    )
 }
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-   (store) => async (): Promise<any> => {
-      const response = await fetch('https://kanban-task-managment.herokuapp.com/api/board')
+export const getStaticProps: GetServerSideProps = wrapper.getServerSideProps((store) => async (): Promise<any> => {
+   const response = await fetch('https://kanban-task-managment.herokuapp.com/api/board')
 
-      const data = await response.json()
-      store.dispatch(addBoard(data))
-   }
-)
+   const data = await response.json()
+   store.dispatch(addBoard(data))
+})
 
 export default Home
